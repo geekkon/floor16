@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="128" id="bR7-97-P5O">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="128" id="bR7-97-P5O" customClass="DBListCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bR7-97-P5O" id="WVL-pd-MsC">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -56,8 +56,25 @@
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gYW-yq-5Yt">
+                                            <rect key="frame" x="0.0" y="106" width="21" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="YW8-rV-Tj3" id="AkH-6E-X4R"/>
+                                    <outlet property="detailLabel" destination="Whr-Rv-NIF" id="fQP-8s-i5K"/>
+                                    <outlet property="floorsLabel" destination="HSa-4e-1H9" id="BP0-yJ-p8q"/>
+                                    <outlet property="picImageView" destination="kSK-5u-bYW" id="sX8-6z-uXW"/>
+                                    <outlet property="picsCountLabel" destination="gYW-yq-5Yt" id="wRP-ih-jPf"/>
+                                    <outlet property="priceLabel" destination="j7t-sx-x8H" id="xeq-nO-bAB"/>
+                                    <outlet property="streetLabel" destination="Wag-Tm-vA7" id="hfE-eC-6BH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -65,11 +82,13 @@
                             <outlet property="delegate" destination="Hai-sV-gyN" id="Yj4-62-lz2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zvC-gx-pBF"/>
+                    <navigationItem key="navigationItem" id="zvC-gx-pBF">
+                        <barButtonItem key="rightBarButtonItem" image="Filter.png" id="5X8-Rs-iJJ"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5L0-Pg-sCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="99"/>
+            <point key="canvasLocation" x="253" y="98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SAX-rQ-R8k">
@@ -88,6 +107,9 @@
             <point key="canvasLocation" x="-152" y="98"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Filter.png" width="25" height="25"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
