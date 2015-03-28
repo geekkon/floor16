@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DBListTableViewController.h
 //  Floor16
 //
 //  Created by Dim on 28.03.15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface DBListTableViewController : UITableViewController
 
 @end
-
