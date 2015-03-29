@@ -8,10 +8,10 @@
         <scene sceneID="33x-br-4o1">
             <objects>
                 <tableViewController id="Hai-sV-gyN" customClass="DBListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="160" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gke-Jx-7Of">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="128" sectionHeaderHeight="10" sectionFooterHeight="10" id="Gke-Jx-7Of">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="128" id="bR7-97-P5O" customClass="DBListCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -19,7 +19,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dateLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YW8-rV-Tj3">
-                                            <rect key="frame" x="136" y="0.0" width="184" height="11"/>
+                                            <rect key="frame" x="136" y="2" width="176" height="11"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="10"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -37,16 +37,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detailLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Whr-Rv-NIF">
-                                            <rect key="frame" x="136" y="59" width="176" height="12"/>
+                                            <rect key="frame" x="136" y="59" width="176" height="41"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="floorsLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HSa-4e-1H9">
-                                            <rect key="frame" x="136" y="79" width="176" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="priceLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j7t-sx-x8H">
@@ -56,10 +49,10 @@
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gYW-yq-5Yt">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gYW-yq-5Yt">
                                             <rect key="frame" x="0.0" y="106" width="21" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -69,11 +62,11 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="YW8-rV-Tj3" id="AkH-6E-X4R"/>
                                     <outlet property="detailLabel" destination="Whr-Rv-NIF" id="fQP-8s-i5K"/>
-                                    <outlet property="floorsLabel" destination="HSa-4e-1H9" id="BP0-yJ-p8q"/>
                                     <outlet property="picImageView" destination="kSK-5u-bYW" id="sX8-6z-uXW"/>
                                     <outlet property="picsCountLabel" destination="gYW-yq-5Yt" id="wRP-ih-jPf"/>
                                     <outlet property="priceLabel" destination="j7t-sx-x8H" id="xeq-nO-bAB"/>
                                     <outlet property="streetLabel" destination="Wag-Tm-vA7" id="hfE-eC-6BH"/>
+                                    <segue destination="EOz-R7-Qnr" kind="push" identifier="showDetails" id="HaG-7v-m62"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -89,6 +82,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5L0-Pg-sCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="253" y="98"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bsJ-EC-vfa">
+            <objects>
+                <viewController id="EOz-R7-Qnr" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sr1-bf-5fe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dC9-lv-De2">
+                                <rect key="frame" x="143" y="273" width="34" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wli-Gx-jnI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yz4-DG-8k9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="680" y="98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SAX-rQ-R8k">

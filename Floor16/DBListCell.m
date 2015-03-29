@@ -7,6 +7,7 @@
 //
 
 #import "DBListCell.h"
+#import "DBListItem.h"
 
 @implementation DBListCell
 
@@ -18,6 +19,15 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)configureWithItem:(DBListItem *)item {
+    
+    self.streetLabel.text = item.address;
+    
+    if (item.img_cnt == 0) {
+        self.picsCountLabel.alpha = 0.0;
+    }
 }
 
 @end

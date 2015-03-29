@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DBListItem;
 
 @interface DBListCell : UITableViewCell
 
@@ -15,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet UILabel *floorsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
+- (void)configureWithItem:(DBListItem *)item;
 
 @end
