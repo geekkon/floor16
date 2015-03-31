@@ -23,11 +23,32 @@
 
 - (void)configureWithItem:(DBListItem *)item {
     
+    if (item.thumb) {
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
+        self.picImageView.image = [UIImage imageWithData:imageData];
+    } else {
+        self.picImageView.image = [UIImage imageNamed:@"no_image.png"];
+        self.picImageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    
+    self.dateLabel.text = item.created;
+
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f руб.", item.price];
+    
+    if (item.imgs_cnt == 0) {
+        self.picsCountLabel.alpha = 0.0;
+    } else {
+        self.picsCountLabel.alpha = 1.0;
+        self.picsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)item.imgs_cnt];
+    }
+    
     self.streetLabel.text = item.address;
     
-    if (item.img_cnt == 0) {
-        self.picsCountLabel.alpha = 0.0;
-    }
+    self.detailLabel.text = [NSString stringWithFormat:@"Сдается %@ %.0fм2\nна %lu этаже %lu этажного дома",
+                             item.appartment_type,
+                             item.total_area,
+                             (unsigned long)item.floor,
+                             (unsigned long)item.floors];
 }
 
 @end

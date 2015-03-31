@@ -11,8 +11,8 @@
 
 @interface DBListItem : NSObject
 
-@property (strong, nonatomic) NSURL     *thumb;
-@property (assign, nonatomic) NSUInteger img_cnt;
+@property (strong, nonatomic) NSString   *thumb;
+@property (assign, nonatomic) NSUInteger imgs_cnt;
 
 @property (strong, nonatomic) NSString  *created;
 
@@ -28,5 +28,7 @@
 @property (assign, nonatomic) CGFloat   price;
 
 @property (strong, nonatomic) NSString  *seoid;
+
++ (DBListItem *)itemWithDictionary:(NSDictionary *)dictionary;
 
 @end

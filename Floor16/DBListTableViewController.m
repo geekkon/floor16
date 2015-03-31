@@ -10,7 +10,7 @@
 #import "DBListCell.h"
 #import "DBRequestManager.h"
 
-@interface DBListTableViewController ()
+@interface DBListTableViewController () <DBRequestManagerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *items;
 
@@ -22,6 +22,15 @@
     [super viewDidLoad];
     
     self.items = [NSMutableArray array];
+    
+    [self getItems];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(refresh:)
+              forControlEvents:UIControlEventValueChanged];
+    
+    [self.tableView addSubview:refreshControl];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,25 +47,27 @@
 
 - (void)getItems{
     
-    NSArray *newItems = [[DBRequestManager sharedManager] getItemsFromServer];
+    [[DBRequestManager sharedManager] getItemsFromServerWithDelegate:self];
+}
+
+#pragma mark - DBRequestManagerDelegate
+
+- (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items {
     
-    [self.items addObjectsFromArray:newItems];
-    
+    [self.items addObjectsFromArray:items];
+
     [self.tableView reloadData];
+    
+    self.navigationItemLabel.text = [NSString stringWithFormat:@"Всего объявлений %d", 20];
+}
+
+- (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
+    
+    NSLog(@"Fail with error %@", [error localizedDescription]);
 }
 
 
 #pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return 1;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    return [NSString stringWithFormat:@"Всего объявлений: %d", 1];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
@@ -73,6 +84,7 @@
 }
 
 
+#pragma mark - UITableViewDelegate
 
 /*
 #pragma mark - Navigation
@@ -84,5 +96,20 @@
 }
 */
 
+#pragma mark - Actions
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    
+    for (int i = 0; i < [self.items count]; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    
+    [self.items removeAllObjects];
+    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
+    [self getItems];
+    [refreshControl endRefreshing];
+}
 
 @end

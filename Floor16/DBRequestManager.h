@@ -7,11 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+@class DBRequestManager;
+
+@protocol DBRequestManagerDelegate <NSObject>
+
+- (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items;
+- (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error;
+
+@end
+
 
 @interface DBRequestManager : NSObject
 
 + (DBRequestManager *) sharedManager;
 
-- (NSArray *)getItemsFromServer;
+- (void)getItemsFromServerWithDelegate:(id <DBRequestManagerDelegate>)delegate;
 
 @end
