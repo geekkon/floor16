@@ -26,7 +26,6 @@
     
     listItem.floor   = [dictionary[@"floor"] integerValue];
     listItem.floors  = [dictionary[@"floors"] integerValue];
-    listItem.building_type = dictionary[@"building-type"];
     
     listItem.price = [dictionary[@"price"] floatValue];
     

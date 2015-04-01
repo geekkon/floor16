@@ -23,7 +23,6 @@
 
 @property (assign, nonatomic) NSUInteger floor;
 @property (assign, nonatomic) NSUInteger floors;
-@property (strong, nonatomic) NSString   *building_type;
 
 @property (assign, nonatomic) CGFloat   price;
 
