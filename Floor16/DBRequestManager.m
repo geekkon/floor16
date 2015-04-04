@@ -38,9 +38,6 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     self.delegate = delegate;
     
     NSString * requestURL = [baseURL stringByAppendingPathComponent:@"?page=1"];
-//    NSString *requestURL = [baseURL stringByAppendingString:@"?page=1"];
-
-    
     
 //    NSString *requestURL = [baseURL stringByAppendingString:@"?page=1&q={:with-photo true}"];
     
@@ -64,12 +61,15 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
 }
 
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    
+    NSLog(@"!!!!!! Error");
+}
+
 
 #pragma mark - NSURLConnectionDataDelegate
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
-    
-    NSLog(@"willSendRequest %@", request);
     
     return request;
 }
@@ -77,20 +77,14 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     
     self.responseData = [NSMutableData data];
-    
-    NSLog(@"didReceiveResponse %@", response);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    
-    NSLog(@"didReceiveData");
     
     [self.responseData appendData:data];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    NSLog(@"connectionDidFinishLoading");
     
     DBJSONParser *parser = [[DBJSONParser alloc] init];
     

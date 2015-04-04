@@ -8,8 +8,11 @@
 
 #import "DBItemDetailViewController.h"
 #import "DBRequestManager.h"
+#import "DBItemDetails.h"
 
 @interface DBItemDetailViewController () <DBRequestManagerDelegate>
+
+@property (strong, nonatomic) DBItemDetails *itemDetails;
 
 @end
 
@@ -19,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self getItemDetalis];
+    [[DBRequestManager sharedManager] getItemDetailsFromServerWithSeoid:self.seoid andDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,24 +30,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-#pragma mark - Private Methods
-
-- (void)getItemDetalis {
-    
-    [[DBRequestManager sharedManager] getItemDetailsFromServerWithSeoid:self.seoid andDelegate:self];
-}
-
-
 #pragma mark - DBRequestManagerDelegate
 
 - (void)requestManager:(DBRequestManager *)manager didGetItemDetails:(DBItemDetails *)itemDatails {
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:nil delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
-    
-    [alertView show];
-    
-    
+    self.itemDetails = itemDatails;
+    [self.activityIndicator stopAnimating];
+    [ UIView animateWithDuration:1.3
+                      animations:^{
+                          self.view.backgroundColor = [UIColor whiteColor];
+                          [self configureView];
+                      }];
 }
 
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
@@ -52,6 +48,14 @@
     NSLog(@"Fail with error %@", [error localizedDescription]);
 }
 
+
+#pragma mark - Private Methods
+
+- (void)configureView {
+    
+    self.navigationItemLabel.text = self.itemDetails.created;
+    
+}
 
 /*
 #pragma mark - Navigation

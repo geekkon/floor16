@@ -11,5 +11,7 @@
 @interface DBItemDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSString  *seoid;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *navigationItemLabel;
 
 @end

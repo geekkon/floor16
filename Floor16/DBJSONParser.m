@@ -48,19 +48,18 @@
     if (error) {
         
         NSLog(@"Error while parsing %@", [error localizedDescription]);
+        
         return nil;
     }
     
-    DBItemDetails *itemDetails = [[DBItemDetails alloc] init];
-    
     if ([NSJSONSerialization isValidJSONObject:dictionary]) {
         
-        NSLog(@"%@", dictionary);
+        DBItemDetails *itemDetails = [DBItemDetails itemWithDictionary:dictionary];
         
-
+        return itemDetails;
     }
     
-    return itemDetails;
+    return nil;
 }
 
 @end
