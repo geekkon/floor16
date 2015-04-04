@@ -27,7 +27,7 @@
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
         self.picImageView.image = [UIImage imageWithData:imageData];
     } else {
-        self.picImageView.image = [UIImage imageNamed:@"no_image.png"];
+        self.picImageView.image = [UIImage imageNamed:@"No_photo.png"];
         self.picImageView.contentMode = UIViewContentModeScaleToFill;
     }
     
