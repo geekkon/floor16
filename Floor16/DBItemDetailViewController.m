@@ -36,12 +36,9 @@
 - (void)requestManager:(DBRequestManager *)manager didGetItemDetails:(DBItemDetails *)itemDatails {
     
     self.itemDetails = itemDatails;
+    [self configureView];
+    
     [self.activityIndicator stopAnimating];
-    [ UIView animateWithDuration:1.3
-                      animations:^{
-                          self.view.backgroundColor = [UIColor whiteColor];
-                          [self configureView];
-                      }];
 }
 
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
@@ -55,6 +52,7 @@
 - (void)configureView {
     
     self.navigationItemLabel.text = self.itemDetails.created;
+    self.textView.text = self.itemDetails.descr;
     
     self.pageControl.numberOfPages = [self.itemDetails.imgs count];
     
@@ -74,7 +72,6 @@
     
     DBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     
-
     NSString *stringURL = self.itemDetails.imgs[indexPath.row];
     
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringURL]];

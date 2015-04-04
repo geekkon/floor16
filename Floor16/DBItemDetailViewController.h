@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *navigationItemLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 - (IBAction)actionPageControl:(UIPageControl *)sender;
 
