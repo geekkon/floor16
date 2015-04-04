@@ -9,6 +9,7 @@
 #import "DBItemDetailViewController.h"
 #import "DBRequestManager.h"
 #import "DBItemDetails.h"
+#import "DBCollectionViewCell.h"
 
 @interface DBItemDetailViewController () <DBRequestManagerDelegate>
 
@@ -55,7 +56,37 @@
     
     self.navigationItemLabel.text = self.itemDetails.created;
     
+    self.pageControl.numberOfPages = [self.itemDetails.imgs count];
+    
+    [self.collectionView reloadData];
 }
+
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
+    
+    return [self.itemDetails.imgs count];
+}
+
+- (DBCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    DBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
+    
+
+    NSString *stringURL = self.itemDetails.imgs[indexPath.row];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringURL]];
+    
+    cell.imageView.image = [UIImage imageWithData:imageData];
+    
+    return cell;
+}
+
+
+#pragma mark - UICollectionViewDelegate
+
 
 /*
 #pragma mark - Navigation
@@ -66,5 +97,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+#pragma mark - Actions
+
+- (IBAction)actionPageControl:(UIPageControl *)sender {
+    
+}
 
 @end
