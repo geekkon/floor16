@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3268980D1ACB04F600BBE3FD /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3268980C1ACB04F600BBE3FD /* no_image.png */; };
+		32B984901AD00A5900405D89 /* DBItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */; };
+		32B984921AD00AEC00405D89 /* Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B984911AD00AEC00405D89 /* Location.png */; };
+		32B984981AD016B100405D89 /* DBItemDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B984971AD016B100405D89 /* DBItemDetails.m */; };
 		32E8C5211AC6A2FA005D5835 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E8C5201AC6A2FA005D5835 /* main.m */; };
 		32E8C5241AC6A2FA005D5835 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E8C5231AC6A2FA005D5835 /* AppDelegate.m */; };
 		32E8C52A1AC6A2FA005D5835 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E8C5281AC6A2FA005D5835 /* Main.storyboard */; };
@@ -34,6 +37,11 @@
 
 /* Begin PBXFileReference section */
 		3268980C1ACB04F600BBE3FD /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
+		32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemDetailViewController.h; sourceTree = "<group>"; };
+		32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemDetailViewController.m; sourceTree = "<group>"; };
+		32B984911AD00AEC00405D89 /* Location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Location.png; sourceTree = "<group>"; };
+		32B984961AD016B100405D89 /* DBItemDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemDetails.h; sourceTree = "<group>"; };
+		32B984971AD016B100405D89 /* DBItemDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemDetails.m; sourceTree = "<group>"; };
 		32E8C51B1AC6A2FA005D5835 /* Floor16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Floor16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E8C51F1AC6A2FA005D5835 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32E8C5201AC6A2FA005D5835 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -151,6 +159,8 @@
 				32E8C5491AC6A904005D5835 /* DBListTableViewController.m */,
 				32E8C54E1AC6AA4F005D5835 /* DBListCell.h */,
 				32E8C54F1AC6AA4F005D5835 /* DBListCell.m */,
+				32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */,
+				32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -160,6 +170,8 @@
 			children = (
 				32E8C55A1AC6B1B0005D5835 /* DBListItem.h */,
 				32E8C55B1AC6B1B0005D5835 /* DBListItem.m */,
+				32B984961AD016B100405D89 /* DBItemDetails.h */,
+				32B984971AD016B100405D89 /* DBItemDetails.m */,
 				32EAC70D1AC84E82008EA1BD /* DBRequestManager.h */,
 				32EAC70E1AC84E82008EA1BD /* DBRequestManager.m */,
 				32EAC7481AC867D7008EA1BD /* DBJSONParser.h */,
@@ -173,6 +185,7 @@
 			children = (
 				3268980C1ACB04F600BBE3FD /* no_image.png */,
 				32E8C5561AC6AD91005D5835 /* Filter.png */,
+				32B984911AD00AEC00405D89 /* Location.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -262,6 +275,7 @@
 				32E8C52F1AC6A2FA005D5835 /* LaunchScreen.xib in Resources */,
 				32E8C52C1AC6A2FA005D5835 /* Images.xcassets in Resources */,
 				32E8C5581AC6AD91005D5835 /* Filter.png in Resources */,
+				32B984921AD00AEC00405D89 /* Location.png in Resources */,
 				3268980D1ACB04F600BBE3FD /* no_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +299,9 @@
 				32E8C5501AC6AA4F005D5835 /* DBListCell.m in Sources */,
 				32E8C54A1AC6A904005D5835 /* DBListTableViewController.m in Sources */,
 				32EAC74A1AC867D7008EA1BD /* DBJSONParser.m in Sources */,
+				32B984981AD016B100405D89 /* DBItemDetails.m in Sources */,
 				32E8C5211AC6A2FA005D5835 /* main.m in Sources */,
+				32B984901AD00A5900405D89 /* DBItemDetailViewController.m in Sources */,
 				32E8C55C1AC6B1B0005D5835 /* DBListItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

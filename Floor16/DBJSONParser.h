@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class DBItemDetails;
 
 @interface DBJSONParser : NSObject
 
 - (NSArray *)getItemsFromData:(NSMutableData *)data;
+- (DBItemDetails *)getItemDetailsFromData:(NSMutableData *)data;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "DBJSONParser.h"
 #import "DBListItem.h"
+#import "DBItemDetails.h"
 
 @implementation DBJSONParser
 
@@ -36,6 +37,30 @@
     }
     
     return listItems;
+}
+
+- (DBItemDetails *)getItemDetailsFromData:(NSMutableData *)data {
+   
+    NSError *error = nil;
+    
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    if (error) {
+        
+        NSLog(@"Error while parsing %@", [error localizedDescription]);
+        return nil;
+    }
+    
+    DBItemDetails *itemDetails = [[DBItemDetails alloc] init];
+    
+    if ([NSJSONSerialization isValidJSONObject:dictionary]) {
+        
+        NSLog(@"%@", dictionary);
+        
+
+    }
+    
+    return itemDetails;
 }
 
 @end

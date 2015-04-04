@@ -7,14 +7,16 @@
 //
 
 #import "DBListTableViewController.h"
-#import "DBListCell.h"
 #import "DBRequestManager.h"
+#import "DBListCell.h"
+#import "DBListItem.h"
 
 @interface DBListTableViewController () <DBRequestManagerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *items;
 
 @end
+
 
 @implementation DBListTableViewController
 
@@ -86,15 +88,22 @@
 
 #pragma mark - UITableViewDelegate
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"showDetails"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        DBListItem *item = self.items[indexPath.row];
+        
+       [[segue destinationViewController] setSeoid:item.seoid];
+    }
 }
-*/
+
 
 #pragma mark - Actions
 

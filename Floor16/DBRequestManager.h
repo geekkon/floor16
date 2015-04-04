@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 @class DBRequestManager;
+@class DBItemDetails;
 
 @protocol DBRequestManagerDelegate <NSObject>
 
+@optional
 - (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items;
+- (void)requestManager:(DBRequestManager *)manager didGetItemDetails:(DBItemDetails *)itemDatails;
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error;
 
 @end
@@ -22,5 +25,6 @@
 + (DBRequestManager *) sharedManager;
 
 - (void)getItemsFromServerWithDelegate:(id <DBRequestManagerDelegate>)delegate;
-
+- (void)getItemDetailsFromServerWithSeoid:(NSString *)seoid
+                              andDelegate:(id <DBRequestManagerDelegate>)delegate;
 @end

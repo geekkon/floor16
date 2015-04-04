@@ -101,25 +101,18 @@
             </objects>
             <point key="canvasLocation" x="253" y="98"/>
         </scene>
-        <!--View Controller-->
+        <!--Item Detail View Controller-->
         <scene sceneID="bsJ-EC-vfa">
             <objects>
-                <viewController id="EOz-R7-Qnr" sceneMemberID="viewController">
+                <viewController id="EOz-R7-Qnr" customClass="DBItemDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sr1-bf-5fe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dC9-lv-De2">
-                                <rect key="frame" x="143" y="273" width="34" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wli-Gx-jnI"/>
+                    <navigationItem key="navigationItem" id="wli-Gx-jnI">
+                        <barButtonItem key="rightBarButtonItem" image="Location.png" id="pO4-kU-JSB"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yz4-DG-8k9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -144,6 +137,7 @@
     </scenes>
     <resources>
         <image name="Filter.png" width="25" height="25"/>
+        <image name="Location.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

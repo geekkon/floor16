@@ -37,7 +37,8 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     self.delegate = delegate;
     
-    NSString *requestURL = [baseURL stringByAppendingString:@"?page=1"];
+    NSString * requestURL = [baseURL stringByAppendingPathComponent:@"?page=1"];
+//    NSString *requestURL = [baseURL stringByAppendingString:@"?page=1"];
 
     
     
@@ -49,6 +50,18 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
     
     [NSURLConnection connectionWithRequest:request delegate:self];
+}
+
+- (void)getItemDetailsFromServerWithSeoid:(NSString *)seoid andDelegate:(id <DBRequestManagerDelegate>)delegate {
+    
+    self.delegate = delegate;
+    
+    NSString *requestURL = [baseURL stringByAppendingPathComponent:seoid];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
+    
+    [NSURLConnection connectionWithRequest:request delegate:self];
+    
 }
 
 
@@ -80,10 +93,20 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     NSLog(@"connectionDidFinishLoading");
     
     DBJSONParser *parser = [[DBJSONParser alloc] init];
-        
-    NSArray *items = [parser getItemsFromData:self.responseData];
     
-    [self.delegate requestManager:self didGetItems:items];
+    if ([self.delegate respondsToSelector:@selector(requestManager:didGetItems:)]) {
+        
+        NSArray *items = [parser getItemsFromData:self.responseData];
+        
+        [self.delegate requestManager:self didGetItems:items];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(requestManager:didGetItemDetails:)]) {
+        
+        DBItemDetails *itemDetails = [parser getItemDetailsFromData:self.responseData];
+        
+        [self.delegate requestManager:self didGetItemDetails:itemDetails];
+    }
     
     self.responseData = nil;
 }
