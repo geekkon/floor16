@@ -10,6 +10,7 @@
 #import "DBRequestManager.h"
 #import "DBItemDetails.h"
 #import "DBCollectionViewCell.h"
+#import "DBMapAnnotation.h"
 
 @interface DBItemDetailViewController () <DBRequestManagerDelegate>
 
@@ -85,15 +86,22 @@
 #pragma mark - UICollectionViewDelegate
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"showMap"]) {
+        
+        DBMapAnnotation *annotation = [[DBMapAnnotation alloc] init];
+        annotation.title = self.itemDetails.address;
+        
+        [[segue destinationViewController] setAnnotation:annotation];
+    }
 }
-*/
 
 
 #pragma mark - Actions

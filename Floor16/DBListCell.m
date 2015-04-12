@@ -21,15 +21,33 @@
     // Configure the view for the selected state
 }
 
-- (void)configureWithItem:(DBListItem *)item {
+- (void)configureWithItem:(DBListItem *)item andCache:(NSCache *)thumbsCache {
     
-    if (item.thumb) {
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
-        self.picImageView.image = [UIImage imageWithData:imageData];
+    UIImage *cellImage = nil;
+    
+    if (!item.thumb) {
+        
+        cellImage = [UIImage imageNamed:@"No_photo.png"];
+        
+    } else if ([thumbsCache objectForKey:item.thumb]) {
+        
+        cellImage = [thumbsCache objectForKey:item.thumb];
+        
+        NSLog(@"cache used");
+        
     } else {
-        self.picImageView.image = [UIImage imageNamed:@"No_photo.png"];
-        self.picImageView.contentMode = UIViewContentModeScaleToFill;
+        
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
+        cellImage = [UIImage imageWithData:imageData];
+        [thumbsCache setObject:cellImage forKey:item.thumb];
+        
     }
+
+
+    self.picImageView.contentMode = UIViewContentModeScaleToFill;
+
+    
+    self.picImageView.image = cellImage;
     
     self.dateLabel.text = item.created;
 

@@ -14,6 +14,7 @@
 @interface DBListTableViewController () <DBRequestManagerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *items;
+@property (strong, nonatomic) NSCache *thumbsCache;
 
 @end
 
@@ -24,6 +25,7 @@
     [super viewDidLoad];
     
     self.items = [NSMutableArray array];
+    self.thumbsCache = [[NSCache alloc] init];
     
     [self getItems];
     
@@ -80,7 +82,7 @@
     
     DBListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    [cell configureWithItem:self.items[indexPath.row]];
+    [cell configureWithItem:self.items[indexPath.row] andCache:self.thumbsCache];
     
     return cell;
 }

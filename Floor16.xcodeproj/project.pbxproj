@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32167D971ADA66EA008F97ED /* DBMapViewController.m */; };
+		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
+		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
+		328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */; };
 		32B984901AD00A5900405D89 /* DBItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */; };
 		32B984921AD00AEC00405D89 /* Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B984911AD00AEC00405D89 /* Location.png */; };
 		32B984981AD016B100405D89 /* DBItemDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B984971AD016B100405D89 /* DBItemDetails.m */; };
@@ -38,6 +42,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32167D961ADA66EA008F97ED /* DBMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapViewController.h; sourceTree = "<group>"; };
+		32167D971ADA66EA008F97ED /* DBMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapViewController.m; sourceTree = "<group>"; };
+		32167D991ADA67B1008F97ED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		328E7EB81ADAA46E007506BE /* DBMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapAnnotation.h; sourceTree = "<group>"; };
+		328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapAnnotation.m; sourceTree = "<group>"; };
+		328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFilterViewController.h; sourceTree = "<group>"; };
+		328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBFilterViewController.m; sourceTree = "<group>"; };
 		32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemDetailViewController.h; sourceTree = "<group>"; };
 		32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemDetailViewController.m; sourceTree = "<group>"; };
 		32B984911AD00AEC00405D89 /* Location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Location.png; sourceTree = "<group>"; };
@@ -76,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +104,7 @@
 		32E8C5121AC6A2F9005D5835 = {
 			isa = PBXGroup;
 			children = (
+				32167D991ADA67B1008F97ED /* MapKit.framework */,
 				32E8C51D1AC6A2FA005D5835 /* Floor16 */,
 				32E8C5371AC6A2FA005D5835 /* Floor16Tests */,
 				32E8C51C1AC6A2FA005D5835 /* Products */,
@@ -164,10 +177,16 @@
 				32E8C5491AC6A904005D5835 /* DBListTableViewController.m */,
 				32E8C54E1AC6AA4F005D5835 /* DBListCell.h */,
 				32E8C54F1AC6AA4F005D5835 /* DBListCell.m */,
+				328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */,
+				328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */,
 				32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */,
 				32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */,
 				32B9849F1AD0887500405D89 /* DBCollectionViewCell.h */,
 				32B984A01AD0887500405D89 /* DBCollectionViewCell.m */,
+				32167D961ADA66EA008F97ED /* DBMapViewController.h */,
+				32167D971ADA66EA008F97ED /* DBMapViewController.m */,
+				328E7EB81ADAA46E007506BE /* DBMapAnnotation.h */,
+				328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -305,6 +324,8 @@
 			files = (
 				32E8C5241AC6A2FA005D5835 /* AppDelegate.m in Sources */,
 				32EAC70F1AC84E82008EA1BD /* DBRequestManager.m in Sources */,
+				32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */,
+				328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */,
 				32E8C5501AC6AA4F005D5835 /* DBListCell.m in Sources */,
 				32E8C54A1AC6A904005D5835 /* DBListTableViewController.m in Sources */,
 				32B984A11AD0887500405D89 /* DBCollectionViewCell.m in Sources */,
@@ -312,6 +333,7 @@
 				32B984981AD016B100405D89 /* DBItemDetails.m in Sources */,
 				32E8C5211AC6A2FA005D5835 /* main.m in Sources */,
 				32B984901AD00A5900405D89 /* DBItemDetailViewController.m in Sources */,
+				328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */,
 				32E8C55C1AC6B1B0005D5835 /* DBListItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
