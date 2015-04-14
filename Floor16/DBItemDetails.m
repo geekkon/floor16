@@ -14,7 +14,7 @@
     
     DBItemDetails *itemDetails = [[DBItemDetails alloc] init];
     
-    itemDetails.appartment_type = dictionary[@"appartment_type"];
+    itemDetails.appartment_type = dictionary[@"appartment-type"];
     itemDetails.created = dictionary[@"created"];
 
     itemDetails.price = [dictionary[@"price"] floatValue];
@@ -26,7 +26,7 @@
     itemDetails.floor   = [dictionary[@"floor"] integerValue];
     itemDetails.floors  = [dictionary[@"floors"] integerValue];
     
-    itemDetails.address = dictionary[@"building_type"];
+    itemDetails.building_type = dictionary[@"building-type"];
     
     itemDetails.person_name = dictionary[@"person-name"];
 

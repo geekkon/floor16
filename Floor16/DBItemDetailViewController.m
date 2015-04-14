@@ -96,8 +96,11 @@
     
     if ([[segue identifier] isEqualToString:@"showMap"]) {
         
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.itemDetails.lat, self.itemDetails.lng);
+        
         DBMapAnnotation *annotation = [[DBMapAnnotation alloc] init];
         annotation.title = self.itemDetails.address;
+        annotation.coordinate = coordinate;
         
         [[segue destinationViewController] setAnnotation:annotation];
     }

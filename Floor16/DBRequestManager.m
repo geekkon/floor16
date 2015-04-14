@@ -98,7 +98,7 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     if ([self.delegate respondsToSelector:@selector(requestManager:didGetItemDetails:)]) {
         
         DBItemDetails *itemDetails = [parser getItemDetailsFromData:self.responseData];
-        
+                
         [self.delegate requestManager:self didGetItemDetails:itemDetails];
     }
     

@@ -20,6 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self configureMapView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,31 +40,38 @@
 */
 
 
-#pragma mark - MKMapViewDelegate
+#pragma mark - Private Methods
 
-- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered {
-
+- (void)configureMapView {
     
-    self.annotation.coordinate = self.mapView.region.center;
+    static double delta = 20000;
+
+    CLLocationCoordinate2D location = self.annotation.coordinate;
+    
+    MKMapPoint center = MKMapPointForCoordinate(location);
+        
+    MKMapRect rect = MKMapRectMake(center.x - delta, center.y - delta, delta * 2, delta * 2);
+    
+    
+    rect = [self.mapView mapRectThatFits:rect];
+    
+    [self.mapView setVisibleMapRect:rect animated:YES];
     
     [self.mapView addAnnotation:self.annotation];
     
 }
 
+#pragma mark - MKMapViewDelegate
+
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
 
     static NSString* identifier = @"Annotation";
-    
-    MKPinAnnotationView* pin = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-    
-    if (!pin) {
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        pin.pinColor = MKPinAnnotationColorRed;
-        pin.animatesDrop = YES;
-        pin.canShowCallout = YES;
-    } else {
-        pin.annotation = annotation;
-    }
+
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+    pin.pinColor = MKPinAnnotationColorPurple;
+    pin.animatesDrop = YES;
+    pin.canShowCallout = YES;
     
     return pin;
 }
@@ -74,6 +82,11 @@
 - (IBAction)actionMapControl:(UISegmentedControl *)sender {
     
     self.mapView.mapType = sender.selectedSegmentIndex;
+}
+
+- (IBAction)actionSearch:(UIBarButtonItem *)sender {
+    
+    [self.mapView setCenterCoordinate:self.annotation.coordinate animated:YES];
 }
 
 @end

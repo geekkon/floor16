@@ -135,6 +135,11 @@
                                 <action selector="actionMapControl:" destination="lZg-qs-4Up" eventType="valueChanged" id="W6x-ih-zRj"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="uUU-x6-h8p">
+                            <connections>
+                                <action selector="actionSearch:" destination="lZg-qs-4Up" id="BQk-ug-pCx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="wt7-nF-ujO" id="ZDS-jZ-bxP"/>

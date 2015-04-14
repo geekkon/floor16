@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 - (IBAction)actionMapControl:(UISegmentedControl *)sender;
+- (IBAction)actionSearch:(UIBarButtonItem *)sender;
 
 @end
