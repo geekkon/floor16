@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBItemDetailTableViewController : UITableViewController
+@interface DBItemDetailTableViewController : UITableViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (strong, nonatomic) NSString  *seoid;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *navigationItemLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+- (IBAction)actionPageControl:(UIPageControl *)sender;
 
 @end

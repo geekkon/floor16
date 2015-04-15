@@ -13,7 +13,6 @@
 		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
 		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
 		328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */; };
-		32B984901AD00A5900405D89 /* DBItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */; };
 		32B984921AD00AEC00405D89 /* Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B984911AD00AEC00405D89 /* Location.png */; };
 		32B984981AD016B100405D89 /* DBItemDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B984971AD016B100405D89 /* DBItemDetails.m */; };
 		32B9849C1AD04B8600405D89 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B9849B1AD04B8600405D89 /* Logo.png */; };
@@ -54,8 +53,6 @@
 		328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapAnnotation.m; sourceTree = "<group>"; };
 		328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFilterViewController.h; sourceTree = "<group>"; };
 		328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBFilterViewController.m; sourceTree = "<group>"; };
-		32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemDetailViewController.h; sourceTree = "<group>"; };
-		32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemDetailViewController.m; sourceTree = "<group>"; };
 		32B984911AD00AEC00405D89 /* Location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Location.png; sourceTree = "<group>"; };
 		32B984961AD016B100405D89 /* DBItemDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemDetails.h; sourceTree = "<group>"; };
 		32B984971AD016B100405D89 /* DBItemDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemDetails.m; sourceTree = "<group>"; };
@@ -186,8 +183,6 @@
 				328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */,
 				320CC9601ADEF2F700CE1717 /* DBItemDetailTableViewController.h */,
 				320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */,
-				32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */,
-				32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */,
 				32B9849F1AD0887500405D89 /* DBCollectionViewCell.h */,
 				32B984A01AD0887500405D89 /* DBCollectionViewCell.m */,
 				32167D961ADA66EA008F97ED /* DBMapViewController.h */,
@@ -342,7 +337,6 @@
 				32EAC74A1AC867D7008EA1BD /* DBJSONParser.m in Sources */,
 				32B984981AD016B100405D89 /* DBItemDetails.m in Sources */,
 				32E8C5211AC6A2FA005D5835 /* main.m in Sources */,
-				32B984901AD00A5900405D89 /* DBItemDetailViewController.m in Sources */,
 				328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */,
 				32E8C55C1AC6B1B0005D5835 /* DBListItem.m in Sources */,
 			);
