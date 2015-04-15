@@ -28,7 +28,7 @@
                                             <rect key="frame" x="108" y="0.0" width="204" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detailLabel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Whr-Rv-NIF">
@@ -49,7 +49,7 @@
                                             <rect key="frame" x="108" y="74" width="89" height="13"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="10"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="priceLabel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j7t-sx-x8H">
@@ -135,9 +135,9 @@
                                 <action selector="actionMapControl:" destination="lZg-qs-4Up" eventType="valueChanged" id="W6x-ih-zRj"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="uUU-x6-h8p">
+                        <barButtonItem key="rightBarButtonItem" image="Find.png" id="uUU-x6-h8p">
                             <connections>
-                                <action selector="actionSearch:" destination="lZg-qs-4Up" id="BQk-ug-pCx"/>
+                                <action selector="actionFind:" destination="lZg-qs-4Up" id="aRp-EW-tXq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -275,6 +275,7 @@
     </scenes>
     <resources>
         <image name="Filter.png" width="25" height="25"/>
+        <image name="Find.png" width="25" height="25"/>
         <image name="Location.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -44,7 +44,7 @@
 
 - (void)configureMapView {
     
-    static double delta = 20000;
+    static double delta = 10000.0;
 
     CLLocationCoordinate2D location = self.annotation.coordinate;
     
@@ -52,24 +52,22 @@
         
     MKMapRect rect = MKMapRectMake(center.x - delta, center.y - delta, delta * 2, delta * 2);
     
-    
     rect = [self.mapView mapRectThatFits:rect];
     
     [self.mapView setVisibleMapRect:rect animated:YES];
     
     [self.mapView addAnnotation:self.annotation];
-    
 }
+
 
 #pragma mark - MKMapViewDelegate
 
-
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
 
-    static NSString* identifier = @"Annotation";
+    static NSString *identifier = @"Annotation";
 
-    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-    pin.pinColor = MKPinAnnotationColorPurple;
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                               reuseIdentifier:identifier];
     pin.animatesDrop = YES;
     pin.canShowCallout = YES;
     
@@ -84,7 +82,7 @@
     self.mapView.mapType = sender.selectedSegmentIndex;
 }
 
-- (IBAction)actionSearch:(UIBarButtonItem *)sender {
+- (IBAction)actionFind:(UIBarButtonItem *)sender {
     
     [self.mapView setCenterCoordinate:self.annotation.coordinate animated:YES];
 }

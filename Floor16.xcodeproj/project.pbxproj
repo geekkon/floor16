@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320CC95E1ADEEC0800CE1717 /* Find.png in Resources */ = {isa = PBXBuildFile; fileRef = 320CC95D1ADEEC0800CE1717 /* Find.png */; };
 		32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32167D971ADA66EA008F97ED /* DBMapViewController.m */; };
 		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
 		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		320CC95D1ADEEC0800CE1717 /* Find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Find.png; sourceTree = "<group>"; };
 		32167D961ADA66EA008F97ED /* DBMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapViewController.h; sourceTree = "<group>"; };
 		32167D971ADA66EA008F97ED /* DBMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapViewController.m; sourceTree = "<group>"; };
 		32167D991ADA67B1008F97ED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -185,8 +187,6 @@
 				32B984A01AD0887500405D89 /* DBCollectionViewCell.m */,
 				32167D961ADA66EA008F97ED /* DBMapViewController.h */,
 				32167D971ADA66EA008F97ED /* DBMapViewController.m */,
-				328E7EB81ADAA46E007506BE /* DBMapAnnotation.h */,
-				328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -202,6 +202,8 @@
 				32EAC70E1AC84E82008EA1BD /* DBRequestManager.m */,
 				32EAC7481AC867D7008EA1BD /* DBJSONParser.h */,
 				32EAC7491AC867D7008EA1BD /* DBJSONParser.m */,
+				328E7EB81ADAA46E007506BE /* DBMapAnnotation.h */,
+				328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -213,6 +215,7 @@
 				32B9849D1AD0756500405D89 /* No_photo.png */,
 				32E8C5561AC6AD91005D5835 /* Filter.png */,
 				32B984911AD00AEC00405D89 /* Location.png */,
+				320CC95D1ADEEC0800CE1717 /* Find.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				32E8C52F1AC6A2FA005D5835 /* LaunchScreen.xib in Resources */,
 				32E8C52C1AC6A2FA005D5835 /* Images.xcassets in Resources */,
 				32E8C5581AC6AD91005D5835 /* Filter.png in Resources */,
+				320CC95E1ADEEC0800CE1717 /* Find.png in Resources */,
 				32B984921AD00AEC00405D89 /* Location.png in Resources */,
 				32B9849C1AD04B8600405D89 /* Logo.png in Resources */,
 				32B9849E1AD0756500405D89 /* No_photo.png in Resources */,
