@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		320CC95E1ADEEC0800CE1717 /* Find.png in Resources */ = {isa = PBXBuildFile; fileRef = 320CC95D1ADEEC0800CE1717 /* Find.png */; };
+		320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */; };
 		32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32167D971ADA66EA008F97ED /* DBMapViewController.m */; };
 		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
 		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
@@ -44,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		320CC95D1ADEEC0800CE1717 /* Find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Find.png; sourceTree = "<group>"; };
+		320CC9601ADEF2F700CE1717 /* DBItemDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemDetailTableViewController.h; sourceTree = "<group>"; };
+		320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemDetailTableViewController.m; sourceTree = "<group>"; };
 		32167D961ADA66EA008F97ED /* DBMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapViewController.h; sourceTree = "<group>"; };
 		32167D971ADA66EA008F97ED /* DBMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapViewController.m; sourceTree = "<group>"; };
 		32167D991ADA67B1008F97ED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -181,6 +184,8 @@
 				32E8C54F1AC6AA4F005D5835 /* DBListCell.m */,
 				328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */,
 				328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */,
+				320CC9601ADEF2F700CE1717 /* DBItemDetailTableViewController.h */,
+				320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */,
 				32B9848E1AD00A5900405D89 /* DBItemDetailViewController.h */,
 				32B9848F1AD00A5900405D89 /* DBItemDetailViewController.m */,
 				32B9849F1AD0887500405D89 /* DBCollectionViewCell.h */,
@@ -333,6 +338,7 @@
 				32E8C5501AC6AA4F005D5835 /* DBListCell.m in Sources */,
 				32E8C54A1AC6A904005D5835 /* DBListTableViewController.m in Sources */,
 				32B984A11AD0887500405D89 /* DBCollectionViewCell.m in Sources */,
+				320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */,
 				32EAC74A1AC867D7008EA1BD /* DBJSONParser.m in Sources */,
 				32B984981AD016B100405D89 /* DBItemDetails.m in Sources */,
 				32E8C5211AC6A2FA005D5835 /* main.m in Sources */,
