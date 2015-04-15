@@ -108,6 +108,10 @@
         DBListItem *item = self.items[indexPath.row];
         
        [[segue destinationViewController] setSeoid:item.seoid];
+        
+    } else if ([[segue identifier] isEqualToString:@"showFilter"]) {
+        
+        NSLog(@"Not Done Yet");
     }
 }
 

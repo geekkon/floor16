@@ -33,13 +33,15 @@
         
         cellImage = [thumbsCache objectForKey:item.thumb];
         
-        NSLog(@"cache used");
-        
     } else {
         
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
-        cellImage = [UIImage imageWithData:imageData];
-        [thumbsCache setObject:cellImage forKey:item.thumb];
+//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
+//        cellImage = [UIImage imageWithData:imageData];
+//        
+        [self performSelectorInBackground:@selector(loadImage:) withObject:[NSURL URLWithString:item.thumb]];
+        
+        
+//        [thumbsCache setObject:cellImage forKey:item.thumb];
         
     }
 
@@ -67,6 +69,16 @@
                              item.total_area,
                              (unsigned long)item.floor,
                              (unsigned long)item.floors];
+}
+
+
+#pragma mark - Private Methods
+
+- (void)loadImage:(NSURL *)URL {
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:URL];
+    
+    self.picImageView.image = [UIImage imageWithData:imageData];
 }
 
 @end

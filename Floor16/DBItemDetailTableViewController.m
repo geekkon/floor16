@@ -140,4 +140,12 @@
 }
 
 
+- (IBAction)tapGesture:(UITapGestureRecognizer *)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tapped" message:nil delegate:nil cancelButtonTitle:@"Cnacel" otherButtonTitles:nil];
+    
+    [alert show];
+    
+}
+
 @end
