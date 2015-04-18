@@ -12,7 +12,7 @@
 
 @implementation DBJSONParser
 
-- (NSArray *)getItemsFromData:(NSMutableData *)data {
+- (NSArray *)getItemsFromData:(NSMutableData *)data totalCount:(NSUInteger *)totalCount {
     
     NSError *error = nil;
     
@@ -23,6 +23,8 @@
         NSLog(@"Error while parsing %@", [error localizedDescription]);
         return nil;
     }
+        
+    *totalCount = [dictionary[@"total"] integerValue];
     
     NSMutableArray *listItems = [NSMutableArray array];
     

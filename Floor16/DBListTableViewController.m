@@ -13,21 +13,23 @@
 
 @interface DBListTableViewController () <DBRequestManagerDelegate>
 
+@property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) NSMutableArray *items;
 @property (strong, nonatomic) NSCache *thumbsCache;
 
 @end
-
 
 @implementation DBListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.currentPage = 1;
+    
+    [self getItemsFromPage:self.currentPage];
+
     self.items = [NSMutableArray array];
     self.thumbsCache = [[NSCache alloc] init];
-    
-    [self getItems];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self
@@ -46,30 +48,54 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Private Methods
 
-- (void)getItems{
+- (void)getItemsFromPage:(NSUInteger)page {
     
-    [[DBRequestManager sharedManager] getItemsFromServerWithDelegate:self];
+    [[DBRequestManager sharedManager] getItemsFromPage:page withDelegate:self];
 }
 
 #pragma mark - DBRequestManagerDelegate
 
-- (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items {
+- (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items totalCount:(NSUInteger *)totalCount {
+    
+    self.currentPage++;
+    
+    NSUInteger currenRows = [self.items count];
+    NSUInteger addedRows  = [items count];
+    
+    
+    
+    for (NSUInteger  i = 0; i  <  addedRows; i++) {
+        
+        NSIndexPath
+    }
     
     [self.items addObjectsFromArray:items];
-
-    [self.tableView reloadData];
     
-    self.navigationItemLabel.text = [NSString stringWithFormat:@"Всего объявлений %d", 20];
+    self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationBottom];
+    
+
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+//                  withRowAnimation:UITableViewRowAnimationBottom];
+    
+    self.navigationItemLabel.text = [NSString stringWithFormat:@"Всего объявлений: %lu", (unsigned long)*totalCount];
+    
+    [self.footerActivityIndicator stopAnimating];
 }
 
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
-    
-    NSLog(@"Fail with error %@", [error localizedDescription]);
-}
 
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                message:[error localizedDescription]
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil];
+    
+    [alert show];
+    
+    [self.footerActivityIndicator startAnimating];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -87,7 +113,6 @@
     return cell;
 }
 
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,6 +120,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.footerActivityIndicator startAnimating];
+    
+    if (indexPath.row == [self.items count] - 1) {
+        [self getItemsFromPage:self.currentPage];
+    }
+}
 
 #pragma mark - Navigation
 
@@ -120,15 +153,15 @@
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
-    NSMutableArray *indexPaths = [NSMutableArray array];
-    
-    for (int i = 0; i < [self.items count]; i++) {
-        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-    }
+    self.currentPage = 1;
     
     [self.items removeAllObjects];
-    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
-    [self getItems];
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationTop];
+    
+    [self getItemsFromPage:self.currentPage];
+
     [refreshControl endRefreshing];
 }
 

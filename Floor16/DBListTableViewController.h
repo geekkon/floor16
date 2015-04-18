@@ -11,5 +11,6 @@
 @interface DBListTableViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *navigationItemLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *footerActivityIndicator;
 
 @end

@@ -33,11 +33,13 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     return manager;
 }
 
-- (void)getItemsFromServerWithDelegate:(id <DBRequestManagerDelegate>)delegate {
+- (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate {
     
     self.delegate = delegate;
     
-    NSString * requestURL = [baseURL stringByAppendingPathComponent:@"?page=1"];
+    NSString *pathComponent = [NSString stringWithFormat:@"?page=%lu", (unsigned long)page];
+    
+    NSString * requestURL = [baseURL stringByAppendingPathComponent:pathComponent];
     
 //    NSString *requestURL = [baseURL stringByAppendingString:@"?page=1&q={:with-photo true}"];
     
@@ -88,11 +90,13 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     DBJSONParser *parser = [[DBJSONParser alloc] init];
     
-    if ([self.delegate respondsToSelector:@selector(requestManager:didGetItems:)]) {
+    if ([self.delegate respondsToSelector:@selector(requestManager:didGetItems:totalCount:)]) {
         
-        NSArray *items = [parser getItemsFromData:self.responseData];
+        NSUInteger totalCount = 0;
         
-        [self.delegate requestManager:self didGetItems:items];
+        NSArray *items = [parser getItemsFromData:self.responseData totalCount:&totalCount];
+        
+        [self.delegate requestManager:self didGetItems:items totalCount:&totalCount];
     }
     
     if ([self.delegate respondsToSelector:@selector(requestManager:didGetItemDetails:)]) {

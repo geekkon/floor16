@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self configureMapView];
 }
@@ -28,23 +27,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-/*
-#pragma mark - Navigation
- 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-// Get the new view controller using [segue destinationViewController].
-// Pass the selected object to the new view controller.
-}
-*/
-
-
 #pragma mark - Private Methods
 
 - (void)configureMapView {
     
-    static double delta = 10000.0;
+    static double delta = 5000.0;
 
     CLLocationCoordinate2D location = self.annotation.coordinate;
     
@@ -57,8 +44,10 @@
     [self.mapView setVisibleMapRect:rect animated:YES];
     
     [self.mapView addAnnotation:self.annotation];
-}
+    
+    [self.mapView selectAnnotation:self.annotation animated:YES];
 
+}
 
 #pragma mark - MKMapViewDelegate
 
@@ -73,7 +62,6 @@
     
     return pin;
 }
-
 
 #pragma mark - Actions
 

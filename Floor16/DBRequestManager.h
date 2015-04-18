@@ -13,7 +13,7 @@
 @protocol DBRequestManagerDelegate <NSObject>
 
 @optional
-- (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items;
+- (void)requestManager:(DBRequestManager *)manager didGetItems:(NSArray *)items totalCount:(NSUInteger *)totalCount;
 - (void)requestManager:(DBRequestManager *)manager didGetItemDetails:(DBItemDetails *)itemDatails;
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error;
 
@@ -24,7 +24,7 @@
 
 + (DBRequestManager *) sharedManager;
 
-- (void)getItemsFromServerWithDelegate:(id <DBRequestManagerDelegate>)delegate;
+- (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate;
 - (void)getItemDetailsFromServerWithSeoid:(NSString *)seoid
                               andDelegate:(id <DBRequestManagerDelegate>)delegate;
 @end

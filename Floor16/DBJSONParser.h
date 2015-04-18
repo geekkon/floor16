@@ -11,7 +11,7 @@
 
 @interface DBJSONParser : NSObject
 
-- (NSArray *)getItemsFromData:(NSMutableData *)data;
+- (NSArray *)getItemsFromData:(NSMutableData *)data totalCount:(NSUInteger *)totalCount;
 - (DBItemDetails *)getItemDetailsFromData:(NSMutableData *)data;
 
 @end
