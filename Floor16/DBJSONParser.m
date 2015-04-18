@@ -21,6 +21,7 @@
     if (error) {
         
         NSLog(@"Error while parsing %@", [error localizedDescription]);
+        
         return nil;
     }
         

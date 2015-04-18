@@ -9,6 +9,12 @@
 #import "DBListCell.h"
 #import "DBListItem.h"
 
+@interface DBListCell ()
+
+@property (strong, nonatomic) NSCache *currentCache;
+
+@end
+
 @implementation DBListCell
 
 - (void)awakeFromNib {
@@ -23,6 +29,8 @@
 
 - (void)configureWithItem:(DBListItem *)item andCache:(NSCache *)thumbsCache {
     
+    self.currentCache = thumbsCache;
+    
     UIImage *cellImage = nil;
     
     if (!item.thumb) {
@@ -30,7 +38,7 @@
         cellImage = [UIImage imageNamed:@"No_photo.png"];
         
     } else if ([thumbsCache objectForKey:item.thumb]) {
-        
+                
         cellImage = [thumbsCache objectForKey:item.thumb];
         
     } else {
@@ -38,16 +46,13 @@
 //        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
 //        cellImage = [UIImage imageWithData:imageData];
 //        
-        [self performSelectorInBackground:@selector(loadImage:) withObject:[NSURL URLWithString:item.thumb]];
-        
+        [self performSelectorInBackground:@selector(loadImage:) withObject:item.thumb];
         
 //        [thumbsCache setObject:cellImage forKey:item.thumb];
         
     }
 
-
     self.picImageView.contentMode = UIViewContentModeScaleToFill;
-
     
     self.picImageView.image = cellImage;
     
@@ -71,14 +76,15 @@
                              (unsigned long)item.floors];
 }
 
-
 #pragma mark - Private Methods
 
-- (void)loadImage:(NSURL *)URL {
+- (void)loadImage:(NSString *)itemThumb {
     
-    NSData *imageData = [NSData dataWithContentsOfURL:URL];
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:itemThumb]];
     
     self.picImageView.image = [UIImage imageWithData:imageData];
+    
+    [self.currentCache setObject:self.picImageView.image forKey:itemThumb];
 }
 
 @end

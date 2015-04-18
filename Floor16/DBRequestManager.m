@@ -25,10 +25,10 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     static DBRequestManager *manager = nil;
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (!manager) {
+        
         manager = [[DBRequestManager alloc] init];
-    });
+    }
     
     return manager;
 }
@@ -65,7 +65,9 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
-    NSLog(@"!!!!!! Error");
+    if ([self.delegate respondsToSelector:@selector(requestManager:didFailWithError:)]) {
+        [self.delegate requestManager:self didFailWithError:error];
+    }
 }
 
 

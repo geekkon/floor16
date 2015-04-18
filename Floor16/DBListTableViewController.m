@@ -16,6 +16,7 @@
 @property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) NSMutableArray *items;
 @property (strong, nonatomic) NSCache *thumbsCache;
+@property (strong, nonatomic) UIActivityIndicatorView *backgroundActivityIndicator;
 
 @end
 
@@ -25,6 +26,14 @@
     [super viewDidLoad];
     
     self.currentPage = 1;
+    
+    self.backgroundActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    self.backgroundActivityIndicator.color = [UIColor lightGrayColor];
+    
+    self.tableView.backgroundView = self.backgroundActivityIndicator;
+    
+    [self.backgroundActivityIndicator startAnimating];
     
     [self getItemsFromPage:self.currentPage];
 
@@ -64,23 +73,20 @@
     NSUInteger currenRows = [self.items count];
     NSUInteger addedRows  = [items count];
     
+    NSMutableArray *indexPaths = [NSMutableArray array];
     
-    
-    for (NSUInteger  i = 0; i  <  addedRows; i++) {
-        
-        NSIndexPath
+    for (NSUInteger i = currenRows; i < (currenRows + addedRows); i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
     
     [self.items addObjectsFromArray:items];
     
-    self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationBottom];
-    
-
-//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
-//                  withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView insertRowsAtIndexPaths:indexPaths
+                          withRowAnimation:UITableViewRowAnimationTop];
     
     self.navigationItemLabel.text = [NSString stringWithFormat:@"Всего объявлений: %lu", (unsigned long)*totalCount];
     
+    [self.backgroundActivityIndicator stopAnimating];
     [self.footerActivityIndicator stopAnimating];
 }
 
@@ -94,7 +100,8 @@
     
     [alert show];
     
-    [self.footerActivityIndicator startAnimating];
+    [self.backgroundActivityIndicator stopAnimating];
+    [self.footerActivityIndicator stopAnimating];
 }
 
 #pragma mark - UITableViewDataSource
@@ -122,9 +129,9 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.footerActivityIndicator startAnimating];
-    
     if (indexPath.row == [self.items count] - 1) {
+        
+        [self.footerActivityIndicator startAnimating];
         [self getItemsFromPage:self.currentPage];
     }
 }
@@ -144,10 +151,8 @@
         
     } else if ([[segue identifier] isEqualToString:@"showFilter"]) {
         
-        NSLog(@"Not Done Yet");
     }
 }
-
 
 #pragma mark - Actions
 

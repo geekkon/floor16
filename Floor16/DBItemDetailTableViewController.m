@@ -34,7 +34,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - DBRequestManagerDelegate
 
 - (void)requestManager:(DBRequestManager *)manager didGetItemDetails:(DBItemDetails *)itemDatails {
@@ -47,9 +46,14 @@
 
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
     
-    NSLog(@"Fail with error %@", [error localizedDescription]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:[error localizedDescription]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
 }
-
 
 #pragma mark - Private Methods
 
@@ -65,8 +69,7 @@
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView
-     numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     return [self.itemDetails.imgs count];
 }
@@ -83,7 +86,6 @@
     
     return cell;
 }
-
 
 #pragma mark - UICollectionViewDelegate
 
@@ -132,19 +134,15 @@
     }
 }
 
-
 #pragma mark - Actions
 
 - (IBAction)actionPageControl:(UIPageControl *)sender {
     
 }
 
-
 - (IBAction)tapGesture:(UITapGestureRecognizer *)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tapped" message:nil delegate:nil cancelButtonTitle:@"Cnacel" otherButtonTitles:nil];
-    
-    [alert show];
+    self.collectionView.frame = [self.view bounds];
     
 }
 

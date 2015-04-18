@@ -19,7 +19,6 @@
 
 @end
 
-
 @interface DBRequestManager : NSObject
 
 + (DBRequestManager *) sharedManager;
