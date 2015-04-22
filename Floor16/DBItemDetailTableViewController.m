@@ -60,11 +60,29 @@
 - (void)configureView {
     
     self.navigationItemLabel.text = self.itemDetails.created;
-    self.textLabel.text = self.itemDetails.descr;
+    self.streetLabel.text = self.itemDetails.address;
+    self.areaLabel.text = [NSString stringWithFormat:@"%.0fм2", self.itemDetails.total_area];
+    self.floorsLabel.text = [NSString stringWithFormat:@"%lu/%lu", self.itemDetails.floor, self.itemDetails.floors];
+    self.buildingLabel.text = [NSString stringWithFormat:@"%@", self.itemDetails.building_type];
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f руб.", self.itemDetails.price];
     
     self.pageControl.numberOfPages = [self.itemDetails.imgs count];
     
     [self.collectionView reloadData];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    self.pageControl.currentPage = self.collectionView.contentOffset.x / CGRectGetWidth(self.view.bounds);
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.pageControl.currentPage = indexPath.row;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -77,7 +95,7 @@
 - (DBCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     DBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
-    
+        
     NSString *stringURL = self.itemDetails.imgs[indexPath.row];
     
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringURL]];
@@ -86,9 +104,6 @@
     
     return cell;
 }
-
-#pragma mark - UICollectionViewDelegate
-
 
 #pragma mark - UITableViewDataSource
 
@@ -102,6 +117,12 @@
     
     return titleForHeader;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    
+    return self.itemDetails.descr;
+}
+
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //#warning Potentially incomplete method implementation.
@@ -146,7 +167,14 @@
 
 #pragma mark - Actions
 
+- (IBAction)actionCall:(UIButton *)sender {
+    
+}
+
 - (IBAction)actionPageControl:(UIPageControl *)sender {
+    
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:sender.currentPage inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+
     
 }
 

@@ -16,7 +16,7 @@
 
 @property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) NSMutableArray *items;
-@property (strong, nonatomic) NSCache *thumbsCache;
+@property (strong, nonatomic) NSCache *defaultCache;
 @property (strong, nonatomic) UIActivityIndicatorView *backgroundActivityIndicator;
 
 @end
@@ -39,7 +39,7 @@
     [self getItemsFromPage:self.currentPage];
 
     self.items = [NSMutableArray array];
-    self.thumbsCache = [[NSCache alloc] init];
+    self.defaultCache = [[NSCache alloc] init];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self
@@ -124,7 +124,7 @@
     
     DBListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    [cell configureWithItem:self.items[indexPath.row] andCache:self.thumbsCache];
+    [cell configureWithItem:self.items[indexPath.row] andCache:self.defaultCache];
     
     return cell;
 }
@@ -181,10 +181,6 @@
     [self getItemsFromPage:self.currentPage];
 
     [refreshControl endRefreshing];
-}
-
-- (IBAction)actionInfo:(UIBarButtonItem *)sender {
-    
 }
 
 @end

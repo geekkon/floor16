@@ -11,6 +11,7 @@
 		320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */; };
 		32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32167D971ADA66EA008F97ED /* DBMapViewController.m */; };
 		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
+		327192051AE83FCE0056F470 /* Phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 327192041AE83FCE0056F470 /* Phone.png */; };
 		3275CCED1AE42DF60034F9B7 /* Info.png in Resources */ = {isa = PBXBuildFile; fileRef = 3275CCEC1AE42DF60034F9B7 /* Info.png */; };
 		3275CCF01AE44F5C0034F9B7 /* DBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */; };
 		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
@@ -51,6 +52,7 @@
 		32167D961ADA66EA008F97ED /* DBMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapViewController.h; sourceTree = "<group>"; };
 		32167D971ADA66EA008F97ED /* DBMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapViewController.m; sourceTree = "<group>"; };
 		32167D991ADA67B1008F97ED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		327192041AE83FCE0056F470 /* Phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Phone.png; sourceTree = "<group>"; };
 		3275CCEC1AE42DF60034F9B7 /* Info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Info.png; sourceTree = "<group>"; };
 		3275CCEE1AE44F5C0034F9B7 /* DBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBWebViewController.h; sourceTree = "<group>"; };
 		3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBWebViewController.m; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				32B984911AD00AEC00405D89 /* Location.png */,
 				320CC95D1ADEEC0800CE1717 /* Find.png */,
 				3275CCEC1AE42DF60034F9B7 /* Info.png */,
+				327192041AE83FCE0056F470 /* Phone.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				32E8C52A1AC6A2FA005D5835 /* Main.storyboard in Resources */,
 				32E8C52F1AC6A2FA005D5835 /* LaunchScreen.xib in Resources */,
 				32E8C52C1AC6A2FA005D5835 /* Images.xcassets in Resources */,
+				327192051AE83FCE0056F470 /* Phone.png in Resources */,
 				32E8C5581AC6AD91005D5835 /* Filter.png in Resources */,
 				320CC95E1ADEEC0800CE1717 /* Find.png in Resources */,
 				32B984921AD00AEC00405D89 /* Location.png in Resources */,

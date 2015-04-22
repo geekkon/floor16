@@ -16,8 +16,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *navigationItemLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *streetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *areaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *floorsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buildingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
+- (IBAction)actionCall:(UIButton *)sender;
 - (IBAction)actionPageControl:(UIPageControl *)sender;
 
 @end
