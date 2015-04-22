@@ -40,7 +40,7 @@
     
     self.itemDetails = itemDatails;
     [self configureView];
-    
+    [self.tableView reloadData];
     [self.activityIndicator stopAnimating];
 }
 
@@ -90,7 +90,18 @@
 #pragma mark - UICollectionViewDelegate
 
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    NSString *titleForHeader = nil;
+    
+    if (self.itemDetails.appartment_type) {
+        titleForHeader = [NSString stringWithFormat:@"Сдается %@", self.itemDetails.appartment_type];
+    }
+    
+    return titleForHeader;
+}
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //#warning Potentially incomplete method implementation.
@@ -140,7 +151,8 @@
 }
 
 - (IBAction)tapGesture:(UITapGestureRecognizer *)sender {
-    
+   
+    // here will be photo browser 
     
 }
 
