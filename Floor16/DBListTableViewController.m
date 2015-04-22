@@ -10,6 +10,7 @@
 #import "DBRequestManager.h"
 #import "DBListCell.h"
 #import "DBListItem.h"
+#include "DBFilterViewController.h"
 
 @interface DBListTableViewController () <DBRequestManagerDelegate>
 
@@ -55,6 +56,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Public Methods
+
+- (void)getItemsWithFilter:(NSDictionary *)filter {
+    
+
+    [self refresh:nil];
 }
 
 #pragma mark - Private Methods
@@ -151,6 +160,10 @@
         
     } else if ([[segue identifier] isEqualToString:@"showFilter"]) {
         
+//        NSLog(@"%@", [[segue destinationViewController] topViewController]);
+        
+        
+        
     }
 }
 
@@ -168,6 +181,10 @@
     [self getItemsFromPage:self.currentPage];
 
     [refreshControl endRefreshing];
+}
+
+- (IBAction)actionInfo:(UIBarButtonItem *)sender {
+    
 }
 
 @end

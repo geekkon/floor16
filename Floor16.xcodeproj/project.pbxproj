@@ -11,6 +11,8 @@
 		320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */; };
 		32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32167D971ADA66EA008F97ED /* DBMapViewController.m */; };
 		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
+		3275CCED1AE42DF60034F9B7 /* Info.png in Resources */ = {isa = PBXBuildFile; fileRef = 3275CCEC1AE42DF60034F9B7 /* Info.png */; };
+		3275CCF01AE44F5C0034F9B7 /* DBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */; };
 		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
 		328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */; };
 		32B984921AD00AEC00405D89 /* Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B984911AD00AEC00405D89 /* Location.png */; };
@@ -49,6 +51,9 @@
 		32167D961ADA66EA008F97ED /* DBMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapViewController.h; sourceTree = "<group>"; };
 		32167D971ADA66EA008F97ED /* DBMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapViewController.m; sourceTree = "<group>"; };
 		32167D991ADA67B1008F97ED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3275CCEC1AE42DF60034F9B7 /* Info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Info.png; sourceTree = "<group>"; };
+		3275CCEE1AE44F5C0034F9B7 /* DBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBWebViewController.h; sourceTree = "<group>"; };
+		3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBWebViewController.m; sourceTree = "<group>"; };
 		328E7EB81ADAA46E007506BE /* DBMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapAnnotation.h; sourceTree = "<group>"; };
 		328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapAnnotation.m; sourceTree = "<group>"; };
 		328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFilterViewController.h; sourceTree = "<group>"; };
@@ -179,6 +184,8 @@
 				32E8C5491AC6A904005D5835 /* DBListTableViewController.m */,
 				32E8C54E1AC6AA4F005D5835 /* DBListCell.h */,
 				32E8C54F1AC6AA4F005D5835 /* DBListCell.m */,
+				3275CCEE1AE44F5C0034F9B7 /* DBWebViewController.h */,
+				3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */,
 				328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */,
 				328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */,
 				320CC9601ADEF2F700CE1717 /* DBItemDetailTableViewController.h */,
@@ -216,6 +223,7 @@
 				32E8C5561AC6AD91005D5835 /* Filter.png */,
 				32B984911AD00AEC00405D89 /* Location.png */,
 				320CC95D1ADEEC0800CE1717 /* Find.png */,
+				3275CCEC1AE42DF60034F9B7 /* Info.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -301,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3275CCED1AE42DF60034F9B7 /* Info.png in Resources */,
 				32E8C52A1AC6A2FA005D5835 /* Main.storyboard in Resources */,
 				32E8C52F1AC6A2FA005D5835 /* LaunchScreen.xib in Resources */,
 				32E8C52C1AC6A2FA005D5835 /* Images.xcassets in Resources */,
@@ -333,6 +342,7 @@
 				32E8C5501AC6AA4F005D5835 /* DBListCell.m in Sources */,
 				32E8C54A1AC6A904005D5835 /* DBListTableViewController.m in Sources */,
 				32B984A11AD0887500405D89 /* DBCollectionViewCell.m in Sources */,
+				3275CCF01AE44F5C0034F9B7 /* DBWebViewController.m in Sources */,
 				320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */,
 				32EAC74A1AC867D7008EA1BD /* DBJSONParser.m in Sources */,
 				32B984981AD016B100405D89 /* DBItemDetails.m in Sources */,

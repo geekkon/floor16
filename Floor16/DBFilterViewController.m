@@ -7,6 +7,7 @@
 //
 
 #import "DBFilterViewController.h"
+#import "DBListTableViewController.h"
 
 @interface DBFilterViewController ()
 
@@ -84,5 +85,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Actions
+
+- (IBAction)actionDone:(UIBarButtonItem *)sender {
+    
+    DBListTableViewController *listViewController = [(UINavigationController *)self.presentingViewController topViewController];
+    
+    [listViewController getItemsWithFilter:nil];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)actionCancel:(UIBarButtonItem *)sender {
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

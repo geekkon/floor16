@@ -10,5 +10,7 @@
 
 @interface DBFilterViewController : UITableViewController
 
+- (IBAction)actionDone:(UIBarButtonItem *)sender;
+- (IBAction)actionCancel:(UIBarButtonItem *)sender;
 
 @end

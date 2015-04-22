@@ -13,4 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *navigationItemLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *footerActivityIndicator;
 
+- (IBAction)actionInfo:(UIBarButtonItem *)sender;
+
+- (void)getItemsWithFilter:(NSDictionary *)filter;
+
 @end
