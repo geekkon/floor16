@@ -9,14 +9,14 @@
 #import "DBListTableViewController.h"
 #import "DBRequestManager.h"
 #import "DBListCell.h"
+#import "DBCacheManager.h"
 #import "DBListItem.h"
-#include "DBFilterViewController.h"
+#import "DBFilterViewController.h"
 
 @interface DBListTableViewController () <DBRequestManagerDelegate>
 
 @property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) NSMutableArray *items;
-@property (strong, nonatomic) NSCache *defaultCache;
 @property (strong, nonatomic) UIActivityIndicatorView *backgroundActivityIndicator;
 
 @end
@@ -39,7 +39,6 @@
     [self getItemsFromPage:self.currentPage];
 
     self.items = [NSMutableArray array];
-    self.defaultCache = [[NSCache alloc] init];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self
@@ -61,7 +60,6 @@
 #pragma mark - Public Methods
 
 - (void)getItemsWithFilter:(NSDictionary *)filter {
-    
 
     [self refresh:nil];
 }
@@ -124,7 +122,7 @@
     
     DBListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    [cell configureWithItem:self.items[indexPath.row] andCache:self.defaultCache];
+    [cell configureWithItem:self.items[indexPath.row]];
     
     return cell;
 }
@@ -153,10 +151,11 @@
     // Pass the selected object to the new view controller.
     
     if ([[segue identifier] isEqualToString:@"showDetails"]) {
+       
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DBListItem *item = self.items[indexPath.row];
         
-       [[segue destinationViewController] setSeoid:item.seoid];
+        [[segue destinationViewController] setSeoid:item.seoid];
         
     } else if ([[segue identifier] isEqualToString:@"showFilter"]) {
         

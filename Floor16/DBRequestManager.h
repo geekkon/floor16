@@ -21,7 +21,7 @@
 
 @interface DBRequestManager : NSObject
 
-+ (DBRequestManager *) sharedManager;
++ (DBRequestManager *)sharedManager;
 
 - (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate;
 - (void)getItemDetailsFromServerWithSeoid:(NSString *)seoid

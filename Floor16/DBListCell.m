@@ -8,10 +8,9 @@
 
 #import "DBListCell.h"
 #import "DBListItem.h"
+#import "DBCacheManager.h"
 
 @interface DBListCell ()
-
-@property (strong, nonatomic) NSCache *currentCache;
 
 @end
 
@@ -27,9 +26,7 @@
     // Configure the view for the selected state
 }
 
-- (void)configureWithItem:(DBListItem *)item andCache:(NSCache *)thumbsCache {
-    
-    self.currentCache = thumbsCache;
+- (void)configureWithItem:(DBListItem *)item {
     
     UIImage *cellImage = nil;
     
@@ -37,19 +34,13 @@
         
         cellImage = [UIImage imageNamed:@"No_photo.png"];
         
-    } else if ([thumbsCache objectForKey:item.thumb]) {
+    } else if ([[DBCacheManager defaultManager] imageForKey:item.thumb]) {
                 
-        cellImage = [thumbsCache objectForKey:item.thumb];
+        cellImage = [[DBCacheManager defaultManager] imageForKey:item.thumb];
         
     } else {
-        
-//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:item.thumb]];
-//        cellImage = [UIImage imageWithData:imageData];
-//        
+
         [self performSelectorInBackground:@selector(loadImage:) withObject:item.thumb];
-        
-//        [thumbsCache setObject:cellImage forKey:item.thumb];
-        
     }
 
     self.picImageView.contentMode = UIViewContentModeScaleToFill;
@@ -60,13 +51,10 @@
 
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f руб.", item.price];
     
-    if (item.imgs_cnt == 0) {
-        self.picsCountLabel.alpha = 0.0;
-    } else {
-        self.picsCountLabel.alpha = 1.0;
-        self.picsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)item.imgs_cnt];
-    }
+    self.picsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)item.imgs_cnt];
     
+    self.picsCountLabel.alpha = item.imgs_cnt ? 1.0 : 0.0;
+
     self.streetLabel.text = item.address;
     
     self.detailLabel.text = [NSString stringWithFormat:@"Сдается %@ %.0fм2\nна %lu этаже %lu этажного дома",
@@ -84,7 +72,7 @@
     
     self.picImageView.image = [UIImage imageWithData:imageData];
     
-    [self.currentCache setObject:self.picImageView.image forKey:itemThumb];
+    [[DBCacheManager defaultManager] setImage:self.picImageView.image forKey:itemThumb];
 }
 
 @end

@@ -18,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
-- (void)configureWithItem:(DBListItem *)item andCache:(NSCache *)thumbsCache;
+- (void)configureWithItem:(DBListItem *)item;
 
 @end

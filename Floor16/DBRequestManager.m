@@ -21,7 +21,7 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 
 @implementation DBRequestManager
 
-+ (DBRequestManager *) sharedManager {
++ (DBRequestManager *)sharedManager {
     
     static DBRequestManager *manager = nil;
     

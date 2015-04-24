@@ -10,11 +10,20 @@
 #import "DBRequestManager.h"
 #import "DBItemDetails.h"
 #import "DBCollectionViewCell.h"
+#import "DBCacheManager.h"
 #import "DBMapAnnotation.h"
+
+NS_ENUM(NSUInteger, DBPhoneCallAlertViewButtonType) {
+    DBPhoneCallAlertViewButtonTypeCancel,
+    DBPhoneCallAlertViewButtonTypeCall
+};
+
+NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
 
 @interface DBItemDetailTableViewController () <DBRequestManagerDelegate>
 
 @property (strong, nonatomic) DBItemDetails *itemDetails;
+@property (strong, nonatomic) NSString *phoneNumber;
 
 @end
 
@@ -26,7 +35,8 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    [[DBRequestManager sharedManager] getItemDetailsFromServerWithSeoid:self.seoid andDelegate:self];
+    [[DBRequestManager sharedManager] getItemDetailsFromServerWithSeoid:self.seoid
+                                                            andDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,13 +56,7 @@
 
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:[error localizedDescription]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
+    [self alertWithError:error];
 }
 
 #pragma mark - Private Methods
@@ -71,6 +75,17 @@
     [self.collectionView reloadData];
 }
 
+- (void)alertWithError:(NSError *)error {
+    
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:[error localizedDescription]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+    
+    [errorAlert show];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -80,10 +95,10 @@
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    self.pageControl.currentPage = indexPath.row;
-}
+//- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    self.pageControl.currentPage = indexPath.row;
+//}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -103,6 +118,18 @@
     cell.imageView.image = [UIImage imageWithData:imageData];
     
     return cell;
+}
+
+#pragma mamrk - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 1) {
+        
+        return self.itemDetails.imgs_cnt ? 274.0 : 0.0;
+    }
+    
+    return 72.0;
 }
 
 #pragma mark - UITableViewDataSource
@@ -165,17 +192,77 @@
     }
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == DBPhoneCallAlertViewButtonTypeCall && self.phoneNumber) {
+      
+        NSString *telString = [NSString stringWithFormat:@"tel:%@", self.phoneNumber];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telString]];
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)actionCall:(UIButton *)sender {
+        
+    NSString *phoneString = [basePhoneURL stringByAppendingPathComponent:self.itemDetails.seoid];
     
+    NSURLRequest *phoneRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:phoneString]];
+    
+    NSError *error = nil;
+        
+    NSData *phoneData = [NSURLConnection sendSynchronousRequest:phoneRequest
+                                              returningResponse:nil
+                                                          error:&error];
+    
+    if (error) {
+        
+        [self alertWithError:error];
+        
+        return;
+    }
+    
+    NSArray *phone = [NSJSONSerialization JSONObjectWithData:phoneData options:0 error:&error];
+    
+    if (error) {
+        
+        [self alertWithError:error];
+        
+        return;
+    }
+    
+    if ([NSJSONSerialization isValidJSONObject:phone]) {
+        
+        self.phoneNumber = [phone firstObject];
+        
+        NSString *message = @"";
+        
+        if (self.itemDetails.person_name) {
+            
+            message = [NSString stringWithFormat:@"Арендодатель %@\n", self.itemDetails.person_name];
+        }
+        
+        message = [message stringByAppendingFormat:@"Вызвать %@?", self.phoneNumber];
+        
+        UIAlertView *phoneCallAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                                 message:message
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Cancel"
+                                                       otherButtonTitles:@"Call", nil];
+        
+        [phoneCallAlert show];
+    }
 }
 
 - (IBAction)actionPageControl:(UIPageControl *)sender {
     
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:sender.currentPage inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.currentPage inSection:0];
     
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
 
 - (IBAction)tapGesture:(UITapGestureRecognizer *)sender {
