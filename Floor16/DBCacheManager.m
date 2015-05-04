@@ -23,7 +23,6 @@
     if (!manager) {
         
         manager = [[DBCacheManager alloc] init];
-        
     }
     
     return manager;

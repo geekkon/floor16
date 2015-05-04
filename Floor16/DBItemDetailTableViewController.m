@@ -9,8 +9,9 @@
 #import "DBItemDetailTableViewController.h"
 #import "DBRequestManager.h"
 #import "DBItemDetails.h"
+#import "DBCollectionViewController.h"
 #import "DBCollectionViewCell.h"
-#import "DBCacheManager.h"
+
 #import "DBMapAnnotation.h"
 
 NS_ENUM(NSUInteger, DBPhoneCallAlertViewButtonType) {
@@ -71,19 +72,84 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f руб.", self.itemDetails.price];
     
     self.pageControl.numberOfPages = [self.itemDetails.imgs count];
-    
+
     [self.collectionView reloadData];
 }
 
 - (void)alertWithError:(NSError *)error {
     
-    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Ошибка"
                                                          message:[error localizedDescription]
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil];
     
     [errorAlert show];
+}
+
+- (void)phoneNumberRequestWithActivityIndicator:(UIActivityIndicatorView *)activityIndicator {
+    
+    NSString *phoneString = [basePhoneURL stringByAppendingPathComponent:self.itemDetails.seoid];
+    
+    NSURLRequest *phoneRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:phoneString]];
+    
+    NSError *error = nil;
+    
+    NSData *phoneData = [NSURLConnection sendSynchronousRequest:phoneRequest
+                                              returningResponse:nil
+                                                          error:&error];
+    
+    if (error) {
+        
+        [self alertWithError:error];
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        
+        return;
+    }
+    
+    NSArray *phone = [NSJSONSerialization JSONObjectWithData:phoneData options:0 error:&error];
+    
+    if (error) {
+        
+        [self alertWithError:error];
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        
+        return;
+    }
+    
+    if ([NSJSONSerialization isValidJSONObject:phone]) {
+        
+        self.phoneNumber = [phone firstObject];
+        
+        [self showPhoneNumberAlert];
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+    }
+}
+
+- (void)showPhoneNumberAlert {
+    
+    NSString *message = @"";
+    
+    if (self.itemDetails.person_name) {
+        
+        message = [NSString stringWithFormat:@"Арендодатель %@\n", self.itemDetails.person_name];
+    }
+    
+    message = [message stringByAppendingFormat:@"Номер %@", self.phoneNumber];
+    
+    UIAlertView *phoneNumberAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                             message:message
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Отмена"
+                                                   otherButtonTitles:@"Звонок", nil];
+    
+    [phoneNumberAlert show];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -113,9 +179,7 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
         
     NSString *stringURL = self.itemDetails.imgs[indexPath.row];
     
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringURL]];
-    
-    cell.imageView.image = [UIImage imageWithData:imageData];
+    [cell configureWithStringURL:stringURL];
     
     return cell;
 }
@@ -150,29 +214,6 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     return self.itemDetails.descr;
 }
 
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -189,6 +230,11 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
         annotation.coordinate = coordinate;
         
         [[segue destinationViewController] setAnnotation:annotation];
+        
+    } else if ([[segue identifier] isEqualToString:@"showPhoto"]) {
+        
+        [[segue destinationViewController] setPics:self.itemDetails.imgs];
+
     }
 }
 
@@ -197,63 +243,96 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (buttonIndex == DBPhoneCallAlertViewButtonTypeCall && self.phoneNumber) {
-      
-        NSString *telString = [NSString stringWithFormat:@"tel:%@", self.phoneNumber];
+                
+        //input format +x(xxx) xxx-xx-xx
+        
+        NSCharacterSet *phoneNumberCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"+1234567890"];
+        
+        NSArray *components = [self.phoneNumber componentsSeparatedByCharactersInSet:[phoneNumberCharacterSet invertedSet]];
+        
+        NSString *phoneNumber = [components componentsJoinedByString:@""];
+        
+        //output format +xxxxxxxxxxx
+                
+        NSString *telString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telString]];
     }
 }
 
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    
+    return self.phoneNumber;
+}
+
 #pragma mark - Actions
 
 - (IBAction)actionCall:(UIButton *)sender {
-        
-    NSString *phoneString = [basePhoneURL stringByAppendingPathComponent:self.itemDetails.seoid];
     
-    NSURLRequest *phoneRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:phoneString]];
-    
-    NSError *error = nil;
+    if (self.phoneNumber) {
         
-    NSData *phoneData = [NSURLConnection sendSynchronousRequest:phoneRequest
-                                              returningResponse:nil
-                                                          error:&error];
-    
-    if (error) {
+        [self showPhoneNumberAlert];
         
-        [self alertWithError:error];
+    } else {
         
-        return;
-    }
-    
-    NSArray *phone = [NSJSONSerialization JSONObjectWithData:phoneData options:0 error:&error];
-    
-    if (error) {
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        [self alertWithError:error];
+        activityIndicator.backgroundColor = [UIColor whiteColor];
+        activityIndicator.frame = sender.bounds;
         
-        return;
-    }
-    
-    if ([NSJSONSerialization isValidJSONObject:phone]) {
+        [activityIndicator startAnimating];
         
-        self.phoneNumber = [phone firstObject];
+        [sender addSubview:activityIndicator];
         
-        NSString *message = @"";
+        /*
         
-        if (self.itemDetails.person_name) {
-            
-            message = [NSString stringWithFormat:@"Арендодатель %@\n", self.itemDetails.person_name];
-        }
+        NSString *phoneString = [basePhoneURL stringByAppendingPathComponent:self.itemDetails.seoid];
         
-        message = [message stringByAppendingFormat:@"Вызвать %@?", self.phoneNumber];
+        NSURLRequest *phoneRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:phoneString]];
         
-        UIAlertView *phoneCallAlert = [[UIAlertView alloc] initWithTitle:nil
-                                                                 message:message
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Cancel"
-                                                       otherButtonTitles:@"Call", nil];
+        [NSURLConnection sendAsynchronousRequest:phoneRequest
+                                           queue:[NSOperationQueue currentQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   
+                                   if (connectionError) {
+                                       
+                                       [self alertWithError:connectionError];
+                                       
+                                       [activityIndicator stopAnimating];
+                                       [activityIndicator removeFromSuperview];
+                                       
+                                       return;
+                                   }
+                                   
+                                   NSError *error = nil;
+                                   
+                                    NSArray *phone = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                                   
+                                           if (error) {
+                                   
+                                               [self alertWithError:error];
+                                   
+                                               [activityIndicator stopAnimating];
+                                               [activityIndicator removeFromSuperview];
+                                   
+                                               return;
+                                           }
+                                   
+                                   if ([NSJSONSerialization isValidJSONObject:phone]) {
+                                       
+                                       self.phoneNumber = [phone firstObject];
+                                       
+                                       [self showPhoneNumberAlert];
+                                       
+                                       [activityIndicator stopAnimating];
+                                       [activityIndicator removeFromSuperview];
+                                   }
+                                   
+                                   
+                               }];
+         */
         
-        [phoneCallAlert show];
+        [self performSelectorInBackground:@selector(phoneNumberRequestWithActivityIndicator:) withObject:activityIndicator];
     }
 }
 
@@ -263,12 +342,6 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-}
-
-- (IBAction)tapGesture:(UITapGestureRecognizer *)sender {
-   
-    // here will be photo browser 
-    
 }
 
 @end

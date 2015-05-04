@@ -15,6 +15,8 @@
 		327192081AEAE3E40056F470 /* DBCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 327192071AEAE3E40056F470 /* DBCacheManager.m */; };
 		3275CCED1AE42DF60034F9B7 /* Info.png in Resources */ = {isa = PBXBuildFile; fileRef = 3275CCEC1AE42DF60034F9B7 /* Info.png */; };
 		3275CCF01AE44F5C0034F9B7 /* DBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */; };
+		328939001AED8E67009EB957 /* DBCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328938FF1AED8E67009EB957 /* DBCollectionViewController.m */; };
+		328939031AED9139009EB957 /* DBFullScreenCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 328939021AED9139009EB957 /* DBFullScreenCollectionViewCell.m */; };
 		328E7EBA1ADAA46E007506BE /* DBMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */; };
 		328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 328E7EBC1ADAAB65007506BE /* DBFilterViewController.m */; };
 		32B984921AD00AEC00405D89 /* Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B984911AD00AEC00405D89 /* Location.png */; };
@@ -59,6 +61,10 @@
 		3275CCEC1AE42DF60034F9B7 /* Info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Info.png; sourceTree = "<group>"; };
 		3275CCEE1AE44F5C0034F9B7 /* DBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBWebViewController.h; sourceTree = "<group>"; };
 		3275CCEF1AE44F5C0034F9B7 /* DBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBWebViewController.m; sourceTree = "<group>"; };
+		328938FE1AED8E67009EB957 /* DBCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCollectionViewController.h; sourceTree = "<group>"; };
+		328938FF1AED8E67009EB957 /* DBCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCollectionViewController.m; sourceTree = "<group>"; };
+		328939011AED9139009EB957 /* DBFullScreenCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFullScreenCollectionViewCell.h; sourceTree = "<group>"; };
+		328939021AED9139009EB957 /* DBFullScreenCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBFullScreenCollectionViewCell.m; sourceTree = "<group>"; };
 		328E7EB81ADAA46E007506BE /* DBMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapAnnotation.h; sourceTree = "<group>"; };
 		328E7EB91ADAA46E007506BE /* DBMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapAnnotation.m; sourceTree = "<group>"; };
 		328E7EBB1ADAAB65007506BE /* DBFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFilterViewController.h; sourceTree = "<group>"; };
@@ -197,6 +203,10 @@
 				320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */,
 				32B9849F1AD0887500405D89 /* DBCollectionViewCell.h */,
 				32B984A01AD0887500405D89 /* DBCollectionViewCell.m */,
+				328938FE1AED8E67009EB957 /* DBCollectionViewController.h */,
+				328938FF1AED8E67009EB957 /* DBCollectionViewController.m */,
+				328939011AED9139009EB957 /* DBFullScreenCollectionViewCell.h */,
+				328939021AED9139009EB957 /* DBFullScreenCollectionViewCell.m */,
 				32167D961ADA66EA008F97ED /* DBMapViewController.h */,
 				32167D971ADA66EA008F97ED /* DBMapViewController.m */,
 			);
@@ -286,6 +296,7 @@
 				TargetAttributes = {
 					32E8C51A1AC6A2F9005D5835 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = XSPQS9H3SF;
 					};
 					32E8C5331AC6A2FA005D5835 = {
 						CreatedOnToolsVersion = 6.2;
@@ -352,6 +363,7 @@
 				32E8C54A1AC6A904005D5835 /* DBListTableViewController.m in Sources */,
 				32B984A11AD0887500405D89 /* DBCollectionViewCell.m in Sources */,
 				327192081AEAE3E40056F470 /* DBCacheManager.m in Sources */,
+				328939001AED8E67009EB957 /* DBCollectionViewController.m in Sources */,
 				3275CCF01AE44F5C0034F9B7 /* DBWebViewController.m in Sources */,
 				320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */,
 				32EAC74A1AC867D7008EA1BD /* DBJSONParser.m in Sources */,
@@ -359,6 +371,7 @@
 				32E8C5211AC6A2FA005D5835 /* main.m in Sources */,
 				328E7EBD1ADAAB65007506BE /* DBFilterViewController.m in Sources */,
 				32E8C55C1AC6B1B0005D5835 /* DBListItem.m in Sources */,
+				328939031AED9139009EB957 /* DBFullScreenCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,9 +493,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Floor16/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -490,9 +506,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Floor16/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

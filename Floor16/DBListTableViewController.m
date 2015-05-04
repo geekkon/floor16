@@ -9,7 +9,6 @@
 #import "DBListTableViewController.h"
 #import "DBRequestManager.h"
 #import "DBListCell.h"
-#import "DBCacheManager.h"
 #import "DBListItem.h"
 #import "DBFilterViewController.h"
 
@@ -30,7 +29,7 @@
     
     self.backgroundActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-    self.backgroundActivityIndicator.color = [UIColor lightGrayColor];
+    self.backgroundActivityIndicator.color = [UIColor darkGrayColor];
     
     self.tableView.backgroundView = self.backgroundActivityIndicator;
     
@@ -99,7 +98,7 @@
 
 - (void)requestManager:(DBRequestManager *)manager didFailWithError:(NSError *)error {
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка"
                                 message:[error localizedDescription]
                                delegate:nil
                       cancelButtonTitle:@"OK"
@@ -169,6 +168,8 @@
 #pragma mark - Actions
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
+    
+    [self.backgroundActivityIndicator startAnimating];
     
     self.currentPage = 1;
     

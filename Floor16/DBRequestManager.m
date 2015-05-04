@@ -29,11 +29,27 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
         
         manager = [[DBRequestManager alloc] init];
     }
-    
+
     return manager;
 }
 
 - (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate {
+    
+    /*
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    params[@"with-photo"] = @"true";
+    
+    NSURLComponents *components = [NSURLComponents componentsWithString:baseURL];
+   
+    NSURLQueryItem *queryItem = [NSURLQueryItem queryItemWithName:@"with-photo" value:@"true"];
+    
+    components.queryItems = @[queryItem];
+    
+    NSURL *url = components.URL;
+    
+    NSLog(@"%@",url);
+    */
     
     self.delegate = delegate;
     
@@ -41,10 +57,41 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     NSString * requestURL = [baseURL stringByAppendingPathComponent:pathComponent];
     
-//    NSString *requestURL = [baseURL stringByAppendingString:@"?page=1&q={:with-photo true}"];
+
+    /*
+    NSString *addedString = @"";
     
-//    baseURL = [baseURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]];
+    if ([params count]) {
+        
+        addedString = [[addedString stringByAppendingString:@"&q: {"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]];
+        
+        requestURL = [requestURL stringByAppendingString:addedString];
+    }
+
+    for (NSString *key in params) {
+        
+        requestURL = [requestURL stringByAppendingFormat:@":%@ %@", key, params[key]];
+        
+    }
     
+    if ([params count]) {
+        requestURL = [requestURL stringByAppendingString:@"}"];
+    }
+    
+//    requestURL = [requestURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]];
+    
+    NSLog(@"%@", requestURL);
+    
+    NSLog(@"%@", [@"%7B%3A" stringByRemovingPercentEncoding]);
+    NSLog(@"%@", [@"{:" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]]);
+    NSLog(@"%@", [@" " stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]]);
+    NSLog(@"%@", [@"}" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]]);
+
+    
+  
+//    requestURL = [requestURL stringByAppendingPathComponent:@"&q=%7B%3Awith-photo%20true%7D"];
+
+    */
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
     
@@ -69,7 +116,6 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
         [self.delegate requestManager:self didFailWithError:error];
     }
 }
-
 
 #pragma mark - NSURLConnectionDataDelegate
 

@@ -26,7 +26,11 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - Public Methods
+
 - (void)configureWithItem:(DBListItem *)item {
+    
+    [self.activityIndicator startAnimating];
     
     UIImage *cellImage = nil;
     
@@ -34,10 +38,14 @@
         
         cellImage = [UIImage imageNamed:@"No_photo.png"];
         
+        [self.activityIndicator stopAnimating];
+        
     } else if ([[DBCacheManager defaultManager] imageForKey:item.thumb]) {
-                
+        
         cellImage = [[DBCacheManager defaultManager] imageForKey:item.thumb];
         
+        [self.activityIndicator stopAnimating];
+
     } else {
 
         [self performSelectorInBackground:@selector(loadImage:) withObject:item.thumb];
@@ -46,7 +54,7 @@
     self.picImageView.contentMode = UIViewContentModeScaleToFill;
     
     self.picImageView.image = cellImage;
-    
+
     self.dateLabel.text = item.created;
 
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f руб.", item.price];
@@ -70,9 +78,13 @@
     
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:itemThumb]];
     
-    self.picImageView.image = [UIImage imageWithData:imageData];
+    UIImage *cellImage = [UIImage imageWithData:imageData];
     
-    [[DBCacheManager defaultManager] setImage:self.picImageView.image forKey:itemThumb];
+    self.picImageView.image = cellImage;
+    
+    [self.activityIndicator stopAnimating];
+        
+    [[DBCacheManager defaultManager] setImage:cellImage forKey:itemThumb];
 }
 
 @end
