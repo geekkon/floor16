@@ -12,7 +12,7 @@ extern NSString * const kFilter;
 extern NSString * const kFilterPhoto;
 extern NSString * const kFilterPrice;
 extern NSString * const kFilterAppartment;
-
+extern NSString * const kFilterAppartmentKyes;
 
 @interface DBFilterViewController : UITableViewController
 

@@ -16,15 +16,18 @@ NS_ENUM(NSUInteger, DBFilterSectionName) {
     DBFilterSectionNameAppartment
 };
 
-NSString * const kFilter            = @"filter";
-NSString * const kFilterPhoto       = @"photo";
-NSString * const kFilterPrice       = @"price";
-NSString * const kFilterAppartment  = @"appartment";
+NSString * const kFilter                = @"filter";
+NSString * const kFilterPhoto           = @"photo";
+NSString * const kFilterPrice           = @"price";
+NSString * const kFilterAppartment      = @"appartment";
+NSString * const kFilterAppartmentKyes  = @"appartment-keys";
 
 @interface DBFilterViewController ()
 
 @property (strong, nonatomic) NSString *priceFooter;
 @property (strong, nonatomic) UIColor *tintColor;
+@property (strong, nonatomic) NSArray *appartmentKeys;
+@property (strong, nonatomic) UIView *labelView;
 
 @end
 
@@ -32,6 +35,8 @@ NSString * const kFilterAppartment  = @"appartment";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.appartmentKeys = @[@"room", @"studio", @"appartment1", @"appartment2", @"appartment3", @"appartment4"];
     
     [self loadFilterState];
     
@@ -62,6 +67,25 @@ NSString * const kFilterAppartment  = @"appartment";
 
 - (void)saveFilterState {
     
+    [[NSUserDefaults standardUserDefaults] setObject:self.appartmentKeys
+                                              forKey:kFilterAppartmentKyes];
+    
+    NSMutableDictionary *buttonsState = [NSMutableDictionary dictionary];
+    
+    for (int i = 0; i < [self.appartmentTypeButtons count]; i++) {
+        
+        NSString *key = self.appartmentKeys[i];
+        
+        UIButton *button = self.appartmentTypeButtons[i];
+        
+        NSString *state = button.isSelected ? @"YES" : @"NO";
+        
+        buttonsState[key] = state;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:buttonsState
+                                                  forKey:kFilterAppartment];
+    
     [[NSUserDefaults standardUserDefaults] setBool:self.filterControl.selectedSegmentIndex
                                             forKey:kFilter];
     
@@ -70,10 +94,6 @@ NSString * const kFilterAppartment  = @"appartment";
     
     [[NSUserDefaults standardUserDefaults] setInteger:(int)self.priceSlider.value
                                                forKey:kFilterPrice];
-    
- 
-    [[NSUserDefaults standardUserDefaults] setObject:self.appartmentTypeButtons forKey:kFilterAppartment];
-    
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -89,7 +109,21 @@ NSString * const kFilterAppartment  = @"appartment";
         self.priceSlider.value = [[NSUserDefaults standardUserDefaults] integerForKey:kFilterPrice];
     }
     
-    self.appartmentTypeButtons = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterAppartment];
+    NSDictionary *buttonsState = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterAppartment];
+    
+    if (buttonsState) {
+        
+        for (int i = 0; i < [self.appartmentTypeButtons count]; i++) {
+            
+            UIButton *button = self.appartmentTypeButtons[i];
+            
+            NSString *key = self.appartmentKeys[i];
+            
+            NSString *state = buttonsState[key];
+            
+            button.selected = [state isEqualToString:@"YES"] ? YES : NO;
+        }
+    }
 }
 
 - (void)setPriceFooterWithValue:(NSInteger)value {
@@ -110,24 +144,34 @@ NSString * const kFilterAppartment  = @"appartment";
 
 - (void)configureView {
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.3];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    
-
-    
     if (self.filterControl.selectedSegmentIndex) {
         
-        self.tableView.alpha = 1.0;
-        self.view.userInteractionEnabled = YES;
-        
+        if (self.labelView) {
+            
+            [self.labelView removeFromSuperview];
+        }
+    
     } else {
         
-        self.tableView.alpha = 0.7;
-        self.view.userInteractionEnabled = NO;
+        if (!self.labelView) {
+            
+            self.labelView = [[UIView alloc] initWithFrame:self.tableView.bounds];
+            
+            self.labelView.backgroundColor = [UIColor lightGrayColor];
+            self.labelView.alpha = 0.7;
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:self.labelView.bounds];
+            
+            label.text = @"Фильтр выключен";
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:20.0];
+            
+            [self.labelView addSubview:label];
+        }
+        
+        [self.tableView addSubview:self.labelView];
     }
-    
-    [UIView commitAnimations];
 }
 
 - (void)configureButtonView:(UIButton *)sender {
@@ -164,8 +208,6 @@ NSString * const kFilterAppartment  = @"appartment";
     
     return nil;
 }
-
-#pragma mark - <UITableViewDelegate>
 
 #pragma mark - Actions
 
