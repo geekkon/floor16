@@ -67,7 +67,7 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     self.navigationItemLabel.text = self.itemDetails.created;
     self.streetLabel.text = self.itemDetails.address;
     self.areaLabel.text = [NSString stringWithFormat:@"%.0fм2", self.itemDetails.total_area];
-    self.floorsLabel.text = [NSString stringWithFormat:@"%lu/%lu", self.itemDetails.floor, self.itemDetails.floors];
+    self.floorsLabel.text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)self.itemDetails.floor, (unsigned long)self.itemDetails.floors];
     self.buildingLabel.text = [NSString stringWithFormat:@"%@", self.itemDetails.building_type];
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f руб.", self.itemDetails.price];
     
@@ -258,11 +258,6 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telString]];
     }
-}
-
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
-    
-    return self.phoneNumber;
 }
 
 #pragma mark - Actions

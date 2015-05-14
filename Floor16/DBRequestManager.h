@@ -23,7 +23,9 @@
 
 + (DBRequestManager *)sharedManager;
 
-- (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate;
+- (void)getItemsFromPage:(NSUInteger)page
+            withDelegate:(id <DBRequestManagerDelegate>)delegate;
+
 - (void)getItemDetailsFromServerWithSeoid:(NSString *)seoid
                               andDelegate:(id <DBRequestManagerDelegate>)delegate;
 @end

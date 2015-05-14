@@ -8,9 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const kFilter;
+extern NSString * const kFilterPhoto;
+extern NSString * const kFilterPrice;
+extern NSString * const kFilterAppartment;
+
+
 @interface DBFilterViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *filterControl;
+
+@property (weak, nonatomic) IBOutlet UISwitch *photoSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *priceSlider;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *appartmentTypeButtons;
+
+- (IBAction)actionFilter:(UISegmentedControl *)sender;
+- (IBAction)actionSlider:(UISlider *)sender;
 - (IBAction)actionDone:(UIBarButtonItem *)sender;
 - (IBAction)actionCancel:(UIBarButtonItem *)sender;
+- (IBAction)actionClickButton:(UIButton *)sender;
 
 @end

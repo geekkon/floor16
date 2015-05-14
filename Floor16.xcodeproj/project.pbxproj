@@ -11,6 +11,7 @@
 		320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320CC9611ADEF2F700CE1717 /* DBItemDetailTableViewController.m */; };
 		32167D981ADA66EA008F97ED /* DBMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32167D971ADA66EA008F97ED /* DBMapViewController.m */; };
 		32167D9A1ADA67B1008F97ED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32167D991ADA67B1008F97ED /* MapKit.framework */; };
+		32706CE71AF80094000D10F6 /* UIImageView+DBImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32706CE61AF80094000D10F6 /* UIImageView+DBImageView.m */; };
 		327192051AE83FCE0056F470 /* Phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 327192041AE83FCE0056F470 /* Phone.png */; };
 		327192081AEAE3E40056F470 /* DBCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 327192071AEAE3E40056F470 /* DBCacheManager.m */; };
 		3275CCED1AE42DF60034F9B7 /* Info.png in Resources */ = {isa = PBXBuildFile; fileRef = 3275CCEC1AE42DF60034F9B7 /* Info.png */; };
@@ -55,6 +56,8 @@
 		32167D961ADA66EA008F97ED /* DBMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMapViewController.h; sourceTree = "<group>"; };
 		32167D971ADA66EA008F97ED /* DBMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMapViewController.m; sourceTree = "<group>"; };
 		32167D991ADA67B1008F97ED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		32706CE51AF80094000D10F6 /* UIImageView+DBImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+DBImageView.h"; sourceTree = "<group>"; };
+		32706CE61AF80094000D10F6 /* UIImageView+DBImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+DBImageView.m"; sourceTree = "<group>"; };
 		327192041AE83FCE0056F470 /* Phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Phone.png; sourceTree = "<group>"; };
 		327192061AEAE3E40056F470 /* DBCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCacheManager.h; sourceTree = "<group>"; };
 		327192071AEAE3E40056F470 /* DBCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCacheManager.m; sourceTree = "<group>"; };
@@ -119,6 +122,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32706CE81AFBF3D8000D10F6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				32706CE51AF80094000D10F6 /* UIImageView+DBImageView.h */,
+				32706CE61AF80094000D10F6 /* UIImageView+DBImageView.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		32E8C5121AC6A2F9005D5835 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +155,7 @@
 			children = (
 				32E8C5221AC6A2FA005D5835 /* AppDelegate.h */,
 				32E8C5231AC6A2FA005D5835 /* AppDelegate.m */,
+				32706CE81AFBF3D8000D10F6 /* Categories */,
 				32E8C54D1AC6A9BC005D5835 /* Models */,
 				32E8C54B1AC6A97D005D5835 /* Controllers */,
 				32E8C5441AC6A818005D5835 /* View */,
@@ -366,6 +379,7 @@
 				328939001AED8E67009EB957 /* DBCollectionViewController.m in Sources */,
 				3275CCF01AE44F5C0034F9B7 /* DBWebViewController.m in Sources */,
 				320CC9621ADEF2F700CE1717 /* DBItemDetailTableViewController.m in Sources */,
+				32706CE71AF80094000D10F6 /* UIImageView+DBImageView.m in Sources */,
 				32EAC74A1AC867D7008EA1BD /* DBJSONParser.m in Sources */,
 				32B984981AD016B100405D89 /* DBItemDetails.m in Sources */,
 				32E8C5211AC6A2FA005D5835 /* main.m in Sources */,

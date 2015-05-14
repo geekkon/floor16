@@ -9,6 +9,7 @@
 #import "DBRequestManager.h"
 #import "DBListItem.h"
 #import "DBJSONParser.h"
+#import "DBFilterViewController.h"
 
 NSString const * baseURL =  @"https://floor16.ru/api/pub";
 
@@ -16,6 +17,7 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (weak, nonatomic) id <DBRequestManagerDelegate> delegate;
+@property (strong, nonatomic) NSCharacterSet *percentEncodingSet;
 
 @end
 
@@ -25,15 +27,70 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     static DBRequestManager *manager = nil;
     
-    if (!manager) {
+    @synchronized(self) {
         
-        manager = [[DBRequestManager alloc] init];
+        if (!manager) {
+            
+            manager = [[DBRequestManager alloc] init];
+        }
     }
-
+    
     return manager;
 }
 
+- (instancetype)init {
+    
+    self = [super init];
+    
+    if (self) {
+        
+        self.percentEncodingSet = [NSCharacterSet characterSetWithCharactersInString:@":{},[] "];
+    }
+    
+    return self;
+}
+
+#pragma mark - Private Methods
+
+- (NSString *)getQueryStringFromUserDefaults {
+    
+    BOOL shouldFilter = [[NSUserDefaults standardUserDefaults] boolForKey:kFilter];
+    
+    if (!shouldFilter) {
+        
+        return nil;
+    }
+    
+    NSString *query = [NSString string];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFilterPhoto]) {
+        
+        query = [query stringByAppendingPathComponent:@"%7B%3Awith-photo%20true%7D"];
+    }
+    
+    
+    return query.length ? query : nil;
+
+//    
+//    self.photoSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:kFilterPhoto];
+//    
+//    if ([[NSUserDefaults standardUserDefaults] integerForKey:kFilterPrice]) {
+//        
+//        self.priceSlider.value = [[NSUserDefaults standardUserDefaults] integerForKey:kFilterPrice];
+//    }
+}
+
+
+#pragma mark - Public Methods
+
 - (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate {
+    
+    NSString *query = [self getQueryStringFromUserDefaults];
+    
+    if (query) {
+        
+        query = [@"{:price {:top 10000, :btm 0}, :with-photo true}" stringByAddingPercentEncodingWithAllowedCharacters:[self.percentEncodingSet invertedSet]];
+    }
     
     /*
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -55,8 +112,12 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     NSString *pathComponent = [NSString stringWithFormat:@"?page=%lu", (unsigned long)page];
     
-    NSString * requestURL = [baseURL stringByAppendingPathComponent:pathComponent];
+    NSString *requestURL = [baseURL stringByAppendingPathComponent:pathComponent];
     
+    if (query) {
+        
+        requestURL = [requestURL stringByAppendingFormat:@"&q=%@", query];
+    }
 
     /*
     NSString *addedString = @"";
@@ -89,7 +150,6 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 
     
   
-//    requestURL = [requestURL stringByAppendingPathComponent:@"&q=%7B%3Awith-photo%20true%7D"];
 
     */
     

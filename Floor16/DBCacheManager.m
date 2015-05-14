@@ -20,9 +20,13 @@
     
     static DBCacheManager *manager = nil;
     
-    if (!manager) {
+    @synchronized(self) {
         
-        manager = [[DBCacheManager alloc] init];
+        
+        if (!manager) {
+            
+            manager = [[DBCacheManager alloc] init];
+        }
     }
     
     return manager;

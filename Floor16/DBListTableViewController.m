@@ -10,7 +10,6 @@
 #import "DBRequestManager.h"
 #import "DBListCell.h"
 #import "DBListItem.h"
-#import "DBFilterViewController.h"
 
 @interface DBListTableViewController () <DBRequestManagerDelegate>
 
@@ -58,16 +57,19 @@
 
 #pragma mark - Public Methods
 
-- (void)getItemsWithFilter:(NSDictionary *)filter {
-
-    [self refresh:nil];
+- (void)getItemsFromPageOne {
+    
+    [self.refreshControl beginRefreshing];
+    
+    [self refresh:self.refreshControl];
 }
 
 #pragma mark - Private Methods
 
 - (void)getItemsFromPage:(NSUInteger)page {
     
-    [[DBRequestManager sharedManager] getItemsFromPage:page withDelegate:self];
+    [[DBRequestManager sharedManager] getItemsFromPage:page
+                                            withDelegate:self];
 }
 
 #pragma mark - DBRequestManagerDelegate
@@ -158,10 +160,7 @@
         
     } else if ([[segue identifier] isEqualToString:@"showFilter"]) {
         
-//        NSLog(@"%@", [[segue destinationViewController] topViewController]);
-        
-        
-        
+        // shows filter controller
     }
 }
 
