@@ -16,8 +16,9 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 @interface DBRequestManager ()
 
 @property (strong, nonatomic) NSMutableData *responseData;
-@property (weak, nonatomic) id <DBRequestManagerDelegate> delegate;
 @property (strong, nonatomic) NSCharacterSet *percentEncodingSet;
+
+@property (weak, nonatomic) id <DBRequestManagerDelegate> delegate;
 
 @end
 
@@ -54,30 +55,79 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
 
 - (NSString *)getQueryStringFromUserDefaults {
     
-    BOOL shouldFilter = [[NSUserDefaults standardUserDefaults] boolForKey:kFilter];
+    NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL shouldFilter = [standartUserDefaults boolForKey:kFilter];
     
     if (!shouldFilter) {
         
         return nil;
     }
     
-    NSString *query = [NSString string];
+    /*
+    NSString *query = @"{";
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFilterPhoto]) {
+    NSDictionary *appartmentType = [standartUserDefaults objectForKey:kFilterAppartment];
+    
+    BOOL appartmentTypeFlag = NO;
+    
+    if (appartmentType) {
         
-        query = [query stringByAppendingPathComponent:@"%7B%3Awith-photo%20true%7D"];
+        NSArray *appartmentKeys = [standartUserDefaults objectForKey:kFilterAppartmentKyes];
+        
+        query = [query stringByAppendingString:@":apprtment-type ["];
+        
+        for (NSString *key in appartmentKeys) {
+            
+            if ([appartmentType[key] isEqualToString:@"YES"]) {
+                
+                query = [query stringByAppendingFormat:@":%@ ", key];
+                
+                appartmentTypeFlag = YES;
+            }
+        }
+        
+        query = [query stringByAppendingString:@"]"];
     }
+    
+    NSInteger price = [standartUserDefaults integerForKey:kFilterPrice];
+
+    BOOL priceFlag = NO;
+    
+    if (price > 0) {
+        
+        if (appartmentTypeFlag) {
+            
+            query = [query stringByAppendingString:@", "];
+        }
+        
+        query = [query stringByAppendingFormat:@":price {:top %ld, :btm 0}", (long)price * 500];
+        
+        priceFlag = YES;
+    }
+    
+    BOOL withPhoto = [standartUserDefaults boolForKey:kFilterPhoto];
+    
+    if (withPhoto) {
+        
+        if (appartmentTypeFlag || priceFlag) {
+            
+            query = [query stringByAppendingString:@", "];
+        }
+        
+        query = [query stringByAppendingString:@":with-photo true"];
+    }
+    
+    query = [query stringByAppendingString:@"}"];
+    
+    
+    NSLog(@"%@", query);
+     
+    */
+    
     
     
     return query.length ? query : nil;
-
-//    
-//    self.photoSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:kFilterPhoto];
-//    
-//    if ([[NSUserDefaults standardUserDefaults] integerForKey:kFilterPrice]) {
-//        
-//        self.priceSlider.value = [[NSUserDefaults standardUserDefaults] integerForKey:kFilterPrice];
-//    }
 }
 
 
@@ -89,24 +139,10 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     if (query) {
         
-        query = [@"{:price {:top 10000, :btm 0}, :with-photo true}" stringByAddingPercentEncodingWithAllowedCharacters:[self.percentEncodingSet invertedSet]];
+        query = [query stringByAddingPercentEncodingWithAllowedCharacters:[self.percentEncodingSet invertedSet]];
     }
     
-    /*
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
-    params[@"with-photo"] = @"true";
-    
-    NSURLComponents *components = [NSURLComponents componentsWithString:baseURL];
-   
-    NSURLQueryItem *queryItem = [NSURLQueryItem queryItemWithName:@"with-photo" value:@"true"];
-    
-    components.queryItems = @[queryItem];
-    
-    NSURL *url = components.URL;
-    
-    NSLog(@"%@",url);
-    */
+    NSLog(@"%@", query);
     
     self.delegate = delegate;
     
@@ -118,40 +154,9 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
         
         requestURL = [requestURL stringByAppendingFormat:@"&q=%@", query];
     }
-
-    /*
-    NSString *addedString = @"";
-    
-    if ([params count]) {
-        
-        addedString = [[addedString stringByAppendingString:@"&q: {"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]];
-        
-        requestURL = [requestURL stringByAppendingString:addedString];
-    }
-
-    for (NSString *key in params) {
-        
-        requestURL = [requestURL stringByAppendingFormat:@":%@ %@", key, params[key]];
-        
-    }
-    
-    if ([params count]) {
-        requestURL = [requestURL stringByAppendingString:@"}"];
-    }
-    
-//    requestURL = [requestURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]];
     
     NSLog(@"%@", requestURL);
     
-    NSLog(@"%@", [@"%7B%3A" stringByRemovingPercentEncoding]);
-    NSLog(@"%@", [@"{:" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]]);
-    NSLog(@"%@", [@" " stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]]);
-    NSLog(@"%@", [@"}" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet nonBaseCharacterSet]]);
-
-    
-  
-
-    */
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
     
@@ -167,8 +172,9 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
     
     [NSURLConnection connectionWithRequest:request delegate:self];
-    
 }
+
+#pragma mark - <NSURLConnectionDelegate>
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
@@ -177,7 +183,7 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     }
 }
 
-#pragma mark - NSURLConnectionDataDelegate
+#pragma mark - <NSURLConnectionDataDelegate>
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
     

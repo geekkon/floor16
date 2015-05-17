@@ -22,7 +22,6 @@
     
     @synchronized(self) {
         
-        
         if (!manager) {
             
             manager = [[DBCacheManager alloc] init];

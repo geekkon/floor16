@@ -158,7 +158,7 @@ NSString * const kFilterAppartmentKyes  = @"appartment-keys";
             self.labelView = [[UIView alloc] initWithFrame:self.tableView.bounds];
             
             self.labelView.backgroundColor = [UIColor lightGrayColor];
-            self.labelView.alpha = 0.7;
+            self.labelView.alpha = 0.8;
             
             UILabel *label = [[UILabel alloc] initWithFrame:self.labelView.bounds];
             
