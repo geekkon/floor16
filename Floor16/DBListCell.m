@@ -29,7 +29,6 @@ NSString * const kNoPhoto = @"No_photo.png";
     // Configure the view for the selected state
 }
 
-
 #pragma mark - Public Methods
 
 - (void)configureWithItem:(DBListItem *)item {
@@ -38,6 +37,8 @@ NSString * const kNoPhoto = @"No_photo.png";
     
     NSString *itemThumb = item.thumb ? item.thumb : kNoPhoto;
 
+    self.picImageView.path = itemThumb;
+    
     UIImage *cellImage = [[DBCacheManager defaultManager] imageForKey:itemThumb];
     
     if (!cellImage) {
@@ -50,9 +51,7 @@ NSString * const kNoPhoto = @"No_photo.png";
     }
     
     self.picImageView.contentMode = UIViewContentModeScaleToFill;
-    
-    self.picImageView.path = itemThumb;
-    
+        
     [self.picImageView setImage:cellImage byPath:itemThumb];
     
     self.dateLabel.text = item.created;

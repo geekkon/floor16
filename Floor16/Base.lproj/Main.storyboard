@@ -54,7 +54,7 @@
                 <collectionViewController id="Jlk-sr-6zJ" customClass="DBCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="OrR-An-8l9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="uoS-HV-hTf">
                             <size key="itemSize" width="320" height="568"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -63,19 +63,16 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FullScreenImageCell" id="d8K-7l-nRJ" customClass="DBFullScreenCollectionViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4cH-PR-bkv">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <gestureRecognizers/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="C64-kO-vBc" appends="YES" id="kgj-x8-uWB"/>
-                                            </connections>
                                         </imageView>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="K72-YB-EJT">
                                             <rect key="frame" x="142" y="265" width="37" height="37"/>
@@ -95,15 +92,24 @@
                             <outlet property="delegate" destination="Jlk-sr-6zJ" id="2iw-ao-r7h"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="yUM-PJ-WKW"/>
+                        <barButtonItem image="Left.png" id="smt-pJ-2Va"/>
+                        <barButtonItem image="Right.png" id="8tu-4z-X0A"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="keb-d3-cNL"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="dx8-eT-iJd">
+                        <barButtonItem key="leftBarButtonItem" image="Thumbnails.png" id="Msx-B2-Tp9"/>
+                        <barButtonItem key="rightBarButtonItem" title="Закрыть" id="RE6-zS-LIU">
+                            <connections>
+                                <action selector="actionClose:" destination="Jlk-sr-6zJ" id="bvA-kv-uxe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8R-0R-eGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="C64-kO-vBc">
-                    <connections>
-                        <action selector="actionTap:" destination="Jlk-sr-6zJ" id="ORr-aj-TA2"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="672" y="-582"/>
+            <point key="canvasLocation" x="1114" y="-582"/>
         </scene>
         <!--List Table View Controller-->
         <scene sceneID="33x-br-4o1">
@@ -352,7 +358,7 @@
                                                             <connections>
                                                                 <outlet property="activityIndicator" destination="8Kb-JB-VNL" id="YhT-RF-CtE"/>
                                                                 <outlet property="imageView" destination="Ihh-MX-sgV" id="sRP-dq-5Kw"/>
-                                                                <segue destination="Jlk-sr-6zJ" kind="modal" identifier="showPhoto" id="3yU-ka-z8S"/>
+                                                                <segue destination="NuQ-Yo-3WX" kind="modal" identifier="showPhoto" id="iKh-xZ-sO6"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -679,13 +685,37 @@
             </objects>
             <point key="canvasLocation" x="-152" y="98"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="INx-tB-Nn6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="NuQ-Yo-3WX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fVf-vl-LTJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="EKX-EQ-cjJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="Jlk-sr-6zJ" kind="relationship" relationship="rootViewController" id="05m-VY-fii"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2L7-hl-QfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="672" y="-582"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Filter.png" width="25" height="25"/>
         <image name="Find.png" width="25" height="25"/>
         <image name="Info.png" width="25" height="25"/>
+        <image name="Left.png" width="32" height="32"/>
         <image name="Location.png" width="25" height="25"/>
         <image name="Phone.png" width="25" height="25"/>
+        <image name="Right.png" width="32" height="32"/>
+        <image name="Thumbnails.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

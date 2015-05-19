@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSArray *pics;
 
-- (IBAction)actionTap:(UITapGestureRecognizer *)sender;
+- (void)showPhotoByIndex:(NSUInteger)index;
+
+- (IBAction)actionClose:(UIBarButtonItem *)sender;
 
 @end

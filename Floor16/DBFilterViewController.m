@@ -36,7 +36,7 @@ NSString * const kFilterAppartmentKyes  = @"appartment-keys";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.appartmentKeys = @[@"room", @"studio", @"appartment1", @"appartment2", @"appartment3", @"appartment4"];
+    self.appartmentKeys = @[@":room", @":studio", @":appartment1", @":appartment2", @":appartment3", @":appartment4"];
     
     [self loadFilterState];
     

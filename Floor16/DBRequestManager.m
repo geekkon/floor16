@@ -64,85 +64,72 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
         return nil;
     }
     
-    /*
-    NSString *query = @"{";
-    
+    NSMutableArray *queryComponents = [NSMutableArray array];
+        
     NSDictionary *appartmentType = [standartUserDefaults objectForKey:kFilterAppartment];
-    
-    BOOL appartmentTypeFlag = NO;
     
     if (appartmentType) {
         
         NSArray *appartmentKeys = [standartUserDefaults objectForKey:kFilterAppartmentKyes];
         
-        query = [query stringByAppendingString:@":apprtment-type ["];
+        NSMutableArray *appartmentTypeComponents = [NSMutableArray array];
         
         for (NSString *key in appartmentKeys) {
             
             if ([appartmentType[key] isEqualToString:@"YES"]) {
                 
-                query = [query stringByAppendingFormat:@":%@ ", key];
-                
-                appartmentTypeFlag = YES;
+                [appartmentTypeComponents addObject:key];
             }
         }
         
-        query = [query stringByAppendingString:@"]"];
+        if ([appartmentTypeComponents count]) {
+            
+            NSString *queryComponent = @":appartment-type [";
+            
+            queryComponent = [queryComponent stringByAppendingString:[appartmentTypeComponents componentsJoinedByString:@" "]];
+            
+            queryComponent = [queryComponent stringByAppendingString:@"]"];
+            
+            [queryComponents addObject:queryComponent];
+        }
     }
     
     NSInteger price = [standartUserDefaults integerForKey:kFilterPrice];
-
-    BOOL priceFlag = NO;
     
     if (price > 0) {
         
-        if (appartmentTypeFlag) {
-            
-            query = [query stringByAppendingString:@", "];
-        }
+        NSString *queryComponent = [NSString stringWithFormat:@":price {:top %ld, :btm 0}", (long)price * 500];
         
-        query = [query stringByAppendingFormat:@":price {:top %ld, :btm 0}", (long)price * 500];
-        
-        priceFlag = YES;
+        [queryComponents addObject:queryComponent];
     }
     
     BOOL withPhoto = [standartUserDefaults boolForKey:kFilterPhoto];
-    
+
     if (withPhoto) {
+
+        NSString *queryComponent = @":with-photo true";
         
-        if (appartmentTypeFlag || priceFlag) {
-            
-            query = [query stringByAppendingString:@", "];
-        }
-        
-        query = [query stringByAppendingString:@":with-photo true"];
+        [queryComponents addObject:queryComponent];
     }
     
-    query = [query stringByAppendingString:@"}"];
+    NSString *resultQuery = nil;
     
+    if ([queryComponents count]) {
+        
+        resultQuery = @"{";
+        
+        resultQuery = [resultQuery stringByAppendingString:[queryComponents componentsJoinedByString:@", "]];
+        
+        resultQuery = [resultQuery stringByAppendingString:@"}"];
+        
+    }
     
-    NSLog(@"%@", query);
-     
-    */
-    
-    
-    
-    return query.length ? query : nil;
+    return [resultQuery stringByAddingPercentEncodingWithAllowedCharacters:[self.percentEncodingSet invertedSet]];
 }
-
 
 #pragma mark - Public Methods
 
 - (void)getItemsFromPage:(NSUInteger)page withDelegate:(id <DBRequestManagerDelegate>)delegate {
-    
-    NSString *query = [self getQueryStringFromUserDefaults];
-    
-    if (query) {
-        
-        query = [query stringByAddingPercentEncodingWithAllowedCharacters:[self.percentEncodingSet invertedSet]];
-    }
-    
-    NSLog(@"%@", query);
     
     self.delegate = delegate;
     
@@ -150,13 +137,12 @@ NSString const * baseURL =  @"https://floor16.ru/api/pub";
     
     NSString *requestURL = [baseURL stringByAppendingPathComponent:pathComponent];
     
+    NSString *query = [self getQueryStringFromUserDefaults];
+
     if (query) {
         
         requestURL = [requestURL stringByAppendingFormat:@"&q=%@", query];
     }
-    
-    NSLog(@"%@", requestURL);
-    
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
     

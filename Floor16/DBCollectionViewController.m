@@ -7,7 +7,7 @@
 //
 
 #import "DBCollectionViewController.h"
-#import "DBCollectionViewCell.h"
+#import "DBFullScreenCollectionViewCell.h"
 
 @interface DBCollectionViewController ()
 
@@ -29,6 +29,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Public Methods
+
+- (void)showPhotoByIndex:(NSUInteger)index {
+    
+//    NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:3];
+//    
+//    [self.collectionView scrollToItemAtIndexPath:indexPath
+//                                atScrollPosition:UICollectionViewScrollPositionCenteredVertically
+//                                        animated:YES];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -42,6 +53,7 @@
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
     return [self.pics count];
 }
 
@@ -53,9 +65,9 @@
 //    return cell;
 //}
 
-- (DBCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (DBFullScreenCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    DBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FullScreenImageCell" forIndexPath:indexPath];
+    DBFullScreenCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FullScreenImageCell" forIndexPath:indexPath];
     
     NSString *stringURL = self.pics[indexPath.row];
     
@@ -97,7 +109,7 @@
 
 #pragma mark - Actions
 
-- (IBAction)actionTap:(UITapGestureRecognizer *)sender {
+- (IBAction)actionClose:(UIBarButtonItem *)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

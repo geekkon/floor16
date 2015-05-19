@@ -15,6 +15,7 @@
 #import "DBMapAnnotation.h"
 
 NS_ENUM(NSUInteger, DBPhoneCallAlertViewButtonType) {
+    
     DBPhoneCallAlertViewButtonTypeCancel,
     DBPhoneCallAlertViewButtonTypeCall
 };
@@ -45,7 +46,7 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - DBRequestManagerDelegate
+#pragma mark - <DBRequestManagerDelegate>
 
 - (void)requestManager:(DBRequestManager *)manager didGetItemDetails:(DBItemDetails *)itemDatails {
     
@@ -152,21 +153,21 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     [phoneNumberAlert show];
 }
 
-#pragma mark - UIScrollViewDelegate
+#pragma mark - <UIScrollViewDelegate>
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     self.pageControl.currentPage = self.collectionView.contentOffset.x / CGRectGetWidth(self.view.bounds);
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - <UICollectionViewDelegate>
 
 //- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
 //    
 //    self.pageControl.currentPage = indexPath.row;
 //}
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - <UICollectionViewDataSource>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
@@ -184,7 +185,7 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     return cell;
 }
 
-#pragma mamrk - UITableViewDelegate
+#pragma mamrk - <UITableViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -196,7 +197,7 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
     return 72.0;
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - <UITableViewDataSource>
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
@@ -233,12 +234,17 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
         
     } else if ([[segue identifier] isEqualToString:@"showPhoto"]) {
         
-        [[segue destinationViewController] setPics:self.itemDetails.imgs];
-
+        UINavigationController *navigationController = [segue destinationViewController];
+        
+        DBCollectionViewController *collectionViewController = (DBCollectionViewController *)navigationController.topViewController;
+        
+        collectionViewController.pics = self.itemDetails.imgs;
+        
+        [collectionViewController showPhotoByIndex:3];
     }
 }
 
-#pragma mark - UIAlertViewDelegate
+#pragma mark - <UIAlertViewDelegate>
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     

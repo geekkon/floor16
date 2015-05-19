@@ -8,6 +8,7 @@
 
 #import "DBFullScreenCollectionViewCell.h"
 #import "DBCacheManager.h"
+#import "UIImageView+DBImageView.h"
 
 @implementation DBFullScreenCollectionViewCell
 
@@ -16,32 +17,38 @@
 - (void)configureWithStringURL:(NSString *)stringURL {
     
     [self.activityIndicator startAnimating];
-        
-    self.imageView.image = nil;
     
-    if ([[DBCacheManager defaultManager] imageForKey:stringURL]) {
+    self.imageView.path = stringURL;
+    
+    UIImage *cellImage = [[DBCacheManager defaultManager] imageForKey:stringURL];
+    
+    if (!cellImage) {
         
-        self.imageView.image = [[DBCacheManager defaultManager] imageForKey:stringURL];
-        
-        [self.activityIndicator stopAnimating];
+        [self performSelectorInBackground:@selector(loadImage:) withObject:stringURL];
         
     } else {
         
-        [self performSelectorInBackground:@selector(loadImage:) withObject:stringURL];
+        [self.activityIndicator stopAnimating];
     }
+    
+    [self.imageView setImage:cellImage byPath:stringURL];
 }
 
 #pragma mark - Private Methods
 
 - (void)loadImage:(NSString *)stringURL {
     
+    UIImage *cellImage = nil;
+    
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringURL]];
     
-    self.imageView.image = [UIImage imageWithData:imageData];
+    cellImage = [UIImage imageWithData:imageData];
+    
+    [self.imageView setImage:cellImage byPath:stringURL];
     
     [self.activityIndicator stopAnimating];
     
-    [[DBCacheManager defaultManager] setImage:self.imageView.image forKey:stringURL];
+    [[DBCacheManager defaultManager] setImage:cellImage forKey:stringURL];
 }
 
 @end
