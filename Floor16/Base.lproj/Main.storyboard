@@ -94,8 +94,11 @@
                     </collectionView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="yUM-PJ-WKW"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Ow7-5U-fA5"/>
                         <barButtonItem image="Left.png" id="smt-pJ-2Va"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Fq0-Oh-ISu"/>
                         <barButtonItem image="Right.png" id="8tu-4z-X0A"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="gwD-tE-UfK"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="keb-d3-cNL"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="dx8-eT-iJd">
