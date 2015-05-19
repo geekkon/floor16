@@ -9,9 +9,8 @@
 #import "DBItemDetailTableViewController.h"
 #import "DBRequestManager.h"
 #import "DBItemDetails.h"
-#import "DBCollectionViewController.h"
 #import "DBCollectionViewCell.h"
-
+#import "DBPhotoViewController.h"
 #import "DBMapAnnotation.h"
 
 NS_ENUM(NSUInteger, DBPhoneCallAlertViewButtonType) {
@@ -234,13 +233,11 @@ NSString const * basePhoneURL =  @"https://floor16.ru/api/private";
         
     } else if ([[segue identifier] isEqualToString:@"showPhoto"]) {
         
-        UINavigationController *navigationController = [segue destinationViewController];
+        DBPhotoViewController *photoViewController = [segue destinationViewController];
         
-        DBCollectionViewController *collectionViewController = (DBCollectionViewController *)navigationController.topViewController;
-        
-        collectionViewController.pics = self.itemDetails.imgs;
-        
-        [collectionViewController showPhotoByIndex:3];
+        photoViewController.photoURLs = self.itemDetails.imgs;
+        photoViewController.photoCount = self.itemDetails.imgs_cnt;
+        photoViewController.currentIndex = self.pageControl.currentPage;
     }
 }
 
