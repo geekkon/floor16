@@ -72,7 +72,20 @@
 
 - (IBAction)actionFind:(UIBarButtonItem *)sender {
     
-    [self.mapView setCenterCoordinate:self.annotation.coordinate animated:YES];
+//    [self.mapView setCenterCoordinate:self.annotation.coordinate animated:YES];
+    
+    MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+  
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.annotation.coordinate
+                                                   addressDictionary:nil];
+    
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+    mapItem.name = self.annotation.title;
+
+    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+
+    [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
+                   launchOptions:launchOptions];
 }
 
 @end

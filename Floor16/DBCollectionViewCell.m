@@ -38,11 +38,9 @@
 
 - (void)loadImage:(NSString *)stringURL {
     
-    UIImage *cellImage = nil;
-    
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringURL]];
     
-    cellImage = [UIImage imageWithData:imageData];
+    UIImage *cellImage = [UIImage imageWithData:imageData];
 
     [self.imageView setImage:cellImage byPath:stringURL];
     

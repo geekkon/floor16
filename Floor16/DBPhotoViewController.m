@@ -8,6 +8,7 @@
 
 #import "DBPhotoViewController.h"
 #import "DBCacheManager.h"
+#import "UIImageView+DBImageView.h"
 
 @interface DBPhotoViewController ()
 
@@ -45,18 +46,21 @@
         
         NSString *photoURL = self.photoURLs[index];
         
+        self.imageView.path = photoURL;
+        
         UIImage *image = [[DBCacheManager defaultManager] imageForKey:photoURL];
         
         if (!image) {
             
             [self performSelectorInBackground:@selector(loadImage:) withObject:photoURL];
+            
+        } else {
+            
+            [self.activityIndicator stopAnimating];
         }
         
-        self.imageView.image = image;
+        [self.imageView setImage:image byPath:photoURL];
     }
-    
-    [self.activityIndicator stopAnimating];
-    
 }
 
 - (void)loadImage:(NSString *)photoURL {
@@ -65,9 +69,9 @@
     
     UIImage *image = [UIImage imageWithData:imageData];
     
-    self.imageView.image = image;
-    
-//    [self.activityIndicator stopAnimating];
+    [self.imageView setImage:image byPath:photoURL];
+        
+    [self.activityIndicator stopAnimating];
     
     [[DBCacheManager defaultManager] setImage:image forKey:photoURL];
 }
